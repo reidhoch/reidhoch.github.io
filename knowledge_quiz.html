@@ -222,61 +222,6 @@
             80% { transform: translateX(4px); }
         }
 
-        /* Journey progress indicator */
-        .journey-track {
-            position: relative;
-            height: 48px;
-            background: #e2e8f0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .journey-road {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 12px;
-            transform: translateY(-50%);
-            background: #475569;
-            border-radius: 2px;
-        }
-
-        .journey-road::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: repeating-linear-gradient(
-                90deg,
-                #fbbf24 0px,
-                #fbbf24 20px,
-                transparent 20px,
-                transparent 40px
-            );
-            transform: translateY(-50%);
-        }
-
-        .journey-car {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-            z-index: 10;
-        }
-
-        .journey-flag {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.25rem;
-        }
-
         .progress-bar {
             height: 6px;
             background: #e2e8f0;

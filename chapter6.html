@@ -110,11 +110,6 @@
         }
         .animate-in { animation: fadeIn 0.4s ease-out; }
 
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
         html { scroll-behavior: smooth; }
 
         .key-point {
@@ -163,17 +158,6 @@
             border-radius: 0.375rem;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
-
-        /* Staggered card animations */
-        .card-stagger { opacity: 0; animation: slideInLeft 0.3s ease-out forwards; }
-        .card-stagger:nth-child(1) { animation-delay: 0ms; }
-        .card-stagger:nth-child(2) { animation-delay: 50ms; }
-        .card-stagger:nth-child(3) { animation-delay: 100ms; }
-        .card-stagger:nth-child(4) { animation-delay: 150ms; }
-        .card-stagger:nth-child(5) { animation-delay: 200ms; }
-        .card-stagger:nth-child(6) { animation-delay: 250ms; }
-        .card-stagger:nth-child(7) { animation-delay: 300ms; }
-        .card-stagger:nth-child(8) { animation-delay: 350ms; }
 
         /* Quiz CTA button */
         .cta-btn {
