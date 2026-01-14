@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indiana Driver Permit Study Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        ink: '#1a1a2e',
+                        cream: '#faf9f7',
+                        sage: '#4a7c59',
+                        coral: '#e07a5f',
+                        slate: '#64748b',
+                        asphalt: '#2d3748',
+                        'road-yellow': '#fbbf24',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
+
+        /* Textured background with subtle noise */
+        body {
+            background-color: #faf9f7;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.06),
+                0 8px 24px rgba(0,0,0,0.04),
+                0 20px 48px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4a7c59, #5a9c6a, #4a7c59);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        /* Road-themed decorative elements */
+        .road-line {
+            position: absolute;
+            width: 4px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #fbbf24 0px,
+                #fbbf24 20px,
+                transparent 20px,
+                transparent 40px
+            );
+            opacity: 0.3;
+        }
+
+        .mile-marker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            color: white;
+            font-weight: 700;
+            font-size: 0.875rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .mile-marker::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #2d3748;
+            border-radius: 2px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6649 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
+        }
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-1px);
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: left;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: #4a7c59;
+            transform: scaleY(0);
+            transition: transform 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: #4a7c59;
+            background: #f0fdf4;
+            transform: translateX(4px);
+        }
+        .option-btn:hover:not(:disabled)::before {
+            transform: scaleY(1);
+        }
+        .option-btn:active:not(:disabled) { transform: translateX(4px) scale(0.98); }
+
+        .option-btn.correct {
+            background: linear-gradient(135deg, #4a7c59, #5a9c6a);
+            border-color: #4a7c59;
+            color: white;
+            animation: correctPulse 0.5s ease-out;
+        }
+        .option-btn.correct::before { background: white; transform: scaleY(1); }
+
+        .option-btn.incorrect {
+            background: linear-gradient(135deg, #e07a5f, #d9694c);
+            border-color: #e07a5f;
+            color: white;
+            animation: shake 0.5s ease-out;
+        }
+        .option-btn.incorrect::before { background: white; transform: scaleY(1); }
+
+        .option-btn.neutral {
+            background: #f8fafc;
+            border-color: #e2e8f0;
+            color: #94a3b8;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        /* Journey progress indicator */
+        .journey-track {
+            position: relative;
+            height: 48px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .journey-road {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 12px;
+            transform: translateY(-50%);
+            background: #475569;
+            border-radius: 2px;
+        }
+
+        .journey-road::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #fbbf24 0px,
+                #fbbf24 20px,
+                transparent 20px,
+                transparent 40px
+            );
+            transform: translateY(-50%);
+        }
+
+        .journey-car {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            z-index: 10;
+        }
+
+        .journey-flag {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a7c59, #5a9c6a, #6ab377);
+            border-radius: 3px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .chapter-badge {
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            color: #fbbf24;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
+            letter-spacing: 0.05em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .score-ring {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(#4a7c59 var(--pct), #e2e8f0 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: ringReveal 1s ease-out forwards;
+        }
+
+        @keyframes ringReveal {
+            0% {
+                background: conic-gradient(#4a7c59 0%, #e2e8f0 0);
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .score-ring-inner {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        /* Confetti celebration */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Staggered option animations */
+        .option-stagger-0 { animation: slideIn 0.3s ease-out 0ms both; }
+        .option-stagger-1 { animation: slideIn 0.3s ease-out 75ms both; }
+        .option-stagger-2 { animation: slideIn 0.3s ease-out 150ms both; }
+        .option-stagger-3 { animation: slideIn 0.3s ease-out 225ms both; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeIn 0.4s ease-out; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-bounce { animation: bounce 0.6s ease-in-out; }
+
+        /* Score counter animation */
+        .score-pop {
+            animation: scorePop 0.3s ease-out;
+        }
+
+        @keyframes scorePop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); color: #4a7c59; }
+            100% { transform: scale(1); }
+        }
+
+        /* Decorative road signs */
+        .road-sign {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fef3c7;
+            border: 3px solid #1a1a2e;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #1a1a2e;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Study links with road theme */
+        .study-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .study-link:hover {
+            border-color: #4a7c59;
+            transform: translateX(4px);
+            box-shadow: -4px 0 0 #4a7c59;
+        }
+
+        .study-link-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #1a1a2e;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Decorative road lines -->
+    <div class="road-line hidden sm:block" style="left: 10%; top: 0; bottom: 0;"></div>
+    <div class="road-line hidden sm:block" style="right: 10%; top: 0; bottom: 0;"></div>
+
+    <div class="max-w-lg mx-auto px-4 py-6 sm:py-10 relative">
+        <header class="text-center mb-6 sm:mb-8">
+            <div class="inline-block mb-3">
+                <span class="road-sign">
+                    <span>IN</span>
+                    <span class="text-lg">PERMIT</span>
+                </span>
+            </div>
+            <h1 class="font-display text-2xl sm:text-3xl font-bold text-ink leading-tight">Indiana Driver<br>Study Guide</h1>
+            <p class="text-slate text-sm sm:text-base mt-2">Chapters 6, 7 &amp; 8</p>
+        </header>
+        <div id="app"></div>
+    </div>
+
+    <div id="confetti-container" class="confetti-container"></div>
+
+    <script>
+        var allQuestions = [
+            // Chapter 6 - Signs and Signals
+            { q: 'What does an octagon sign mean?', o: ['Yield', 'Stop', 'Caution', 'No passing'], a: 1, ch: 6 },
+            { q: 'What color are construction signs?', o: ['Yellow', 'Orange', 'Red', 'Green'], a: 1, ch: 6 },
+            { q: 'What does a circular sign warn of?', o: ['School zone', 'Railroad crossing', 'Sharp curve', 'Stop ahead'], a: 1, ch: 6 },
+            { q: 'What does a diamond sign indicate?', o: ['Railroad crossing', 'Warning or hazard ahead', 'Stop required', 'Speed limit'], a: 1, ch: 6 },
+            { q: 'What do green signs show?', o: ['Warnings', 'Directions and guidance', 'Construction zones', 'Regulations'], a: 1, ch: 6 },
+            { q: 'What does a pennant sign mean?', o: ['School zone', 'No passing zone', 'Railroad ahead', 'Yield required'], a: 1, ch: 6 },
+            { q: 'What does a pentagon sign warn of?', o: ['Railroad crossing', 'School zone', 'Stop ahead', 'Construction zone'], a: 1, ch: 6 },
+            { q: 'What does a flashing yellow light mean?', o: ['Stop completely', 'Slow down and proceed with caution', 'Speed up to clear intersection', 'Yield to cross traffic'], a: 1, ch: 6 },
+            { q: 'What does a red flashing light mean?', o: ['Slow down only', 'Stop like a stop sign', 'Yield to traffic', 'Proceed with caution'], a: 1, ch: 6 },
+            { q: 'What do brown signs indicate?', o: ['Construction zones', 'Recreation and cultural sites', 'Road hazards', 'Speed limits'], a: 1, ch: 6 },
+            { q: 'What do blue signs show?', o: ['Warnings', 'Services and amenities', 'Traffic regulations', 'School zones'], a: 1, ch: 6 },
+            { q: 'What do white signs show?', o: ['Warnings', 'Traffic regulations', 'Recreation areas', 'Construction zones'], a: 1, ch: 6 },
+            { q: 'What does a triangle pointing down mean?', o: ['Stop', 'Yield', 'Caution', 'No entry'], a: 1, ch: 6 },
+            { q: 'What do red signs convey?', o: ['Warnings ahead', 'Stop or prohibited actions', 'Services nearby', 'Guidance information'], a: 1, ch: 6 },
+            { q: 'What should you do at a green light?', o: ['Go immediately without looking', 'Proceed when the intersection is clear', 'Speed up through intersection', 'Yield to all traffic'], a: 1, ch: 6 },
+            { q: 'What does a yellow light mean?', o: ['Speed up to clear intersection', 'Signal is about to turn red', 'Stop immediately', 'Yield to pedestrians only'], a: 1, ch: 6 },
+            { q: 'When can you turn right on red?', o: ['Never allowed in Indiana', 'After stopping when safe unless prohibited', 'Without stopping if clear', 'Only during daytime hours'], a: 1, ch: 6 },
+            { q: 'What does fluorescent yellow-green warn of?', o: ['Construction ahead', 'School zones and pedestrians', 'Railroad crossing', 'Sharp curves'], a: 1, ch: 6 },
+
+            // Chapter 7 - Safe Vehicle Operation
+            { q: 'What do yellow lines separate?', o: ['Same direction traffic', 'Opposite direction traffic', 'Construction zones', 'Bicycle lanes'], a: 1, ch: 7 },
+            { q: 'What is the recommended following distance?', o: ['1 car length', '2-3 seconds', '5-6 seconds', '10 feet'], a: 1, ch: 7 },
+            { q: 'What should you do when a school bus has red lights flashing?', o: ['Slow down and pass carefully', 'Stop unless on divided highway opposite side', 'Proceed slowly around the bus', 'Honk to alert children'], a: 1, ch: 7 },
+            { q: 'What is the rural interstate speed limit for passenger vehicles?', o: ['55 mph', '65 mph', '70 mph or as posted', '75 mph'], a: 2, ch: 7 },
+            { q: 'When should you use headlights?', o: ['Only at night', 'Sunset to sunrise or visibility under 500ft', 'Only when raining', 'Only on highways'], a: 1, ch: 7 },
+            { q: 'How much space should you give when passing a bicycle?', o: ['1 foot', '2 feet', '3 feet', '5 feet'], a: 2, ch: 7 },
+            { q: 'How much below the speed limit are work zone limits?', o: ['5 mph below posted', 'At least 10 mph below posted', '15 mph below posted', '20 mph below posted'], a: 1, ch: 7 },
+            { q: 'What headlights should you use in fog?', o: ['High beams', 'Low beams', 'No headlights', 'Hazard lights only'], a: 1, ch: 7 },
+            { q: 'What is the maximum school bus speed on non-interstate roads?', o: ['30 mph', '40 mph or as posted', '50 mph', '55 mph'], a: 1, ch: 7 },
+            { q: 'What should you do for an emergency vehicle with lights on?', o: ['Speed up to get out of the way', 'Move over or slow 10 mph under limit', 'Stop completely in your lane', 'Flash your headlights'], a: 1, ch: 7 },
+            { q: 'What do white lines separate?', o: ['Opposite direction traffic', 'Same direction traffic', 'Different speed zones', 'Parking areas'], a: 1, ch: 7 },
+            { q: 'When can you cross a broken yellow line?', o: ['Never', 'To pass when safe', 'To turn only', 'Only in emergencies'], a: 1, ch: 7 },
+            { q: 'What does a solid yellow line on your side mean?', o: ['May pass freely', 'Do not cross except to turn', 'Construction zone ahead', 'School zone'], a: 1, ch: 7 },
+            { q: 'What is the default urban residential speed limit?', o: ['25 mph', '30 mph', '35 mph', '40 mph'], a: 1, ch: 7 },
+            { q: 'When should you lower your beams?', o: ['Never required', 'Within 500ft of oncoming or 200ft when following', 'Always at night', 'Only in rain'], a: 1, ch: 7 },
+            { q: 'How should you change lanes?', o: ['Quickly to avoid traffic', 'One lane at a time', 'Without signaling if clear', 'Multiple lanes if needed'], a: 1, ch: 7 },
+            { q: 'How should you enter an interstate?', o: ['Stop and wait for opening', 'Use acceleration lane to match speed', 'Drive slowly and merge', 'Enter at any speed'], a: 1, ch: 7 },
+            { q: 'What must incoming traffic do at a roundabout?', o: ['Have right of way', 'Yield to circulating traffic', 'Stop completely', 'Flash headlights'], a: 1, ch: 7 },
+            { q: 'What should you do when being passed?', o: ['Speed up to help them', 'Maintain speed and not increase it', 'Move right immediately', 'Slow down suddenly'], a: 1, ch: 7 },
+            { q: 'Where is passing prohibited?', o: ['On all two-lane roads', 'Within 100ft of intersections and railroads', 'Only at night', 'On any curved road'], a: 1, ch: 7 },
+            { q: 'How should you turn your wheels when parking downhill with a curb?', o: ['Away from curb', 'Toward curb', 'Straight ahead', 'It does not matter'], a: 1, ch: 7 },
+            { q: 'Is texting while driving legal in Indiana?', o: ['Legal if hands-free', 'Illegal', 'Only illegal for teens', 'Legal if stopped in traffic'], a: 1, ch: 7 },
+            { q: 'How can you legally use a cell phone while driving in Indiana?', o: ['If over 21 years old', 'Hands-free only', 'Never allowed', 'Only for emergencies'], a: 1, ch: 7 },
+            { q: 'What defines aggressive driving in Indiana?', o: ['Driving 10 mph over limit', 'Three or more dangerous actions', 'Honking horn once', 'Changing lanes frequently'], a: 1, ch: 7 },
+            { q: 'What should you do on gravel roads?', o: ['Drive faster for traction', 'Slow earlier for turns and stops', 'Use high beams always', 'Maintain highway speed'], a: 1, ch: 7 },
+            { q: 'How far must you park from a fire hydrant?', o: ['10 feet', '15 feet', '20 feet', '25 feet'], a: 1, ch: 7 },
+            { q: 'What must a school bus do at a railroad crossing?', o: ['Never stop', 'Always stop unless tracks are abandoned', 'Only stop if train is coming', 'Slow down but not stop'], a: 1, ch: 7 },
+            { q: 'How far from railroad tracks should you stop?', o: ['5 to 10 feet', 'Between 15 and 50 feet', '100 feet', 'As close as possible'], a: 1, ch: 7 },
+            { q: 'How does a tractor-trailer stopping distance compare to cars?', o: ['Same as cars', 'Twice as long', 'Four times or more', 'Half as long'], a: 2, ch: 7 },
+            { q: 'When are roads most slippery?', o: ['After hours of rain', 'At the start of rainfall', 'Only when frozen', 'During heavy rain'], a: 1, ch: 7 },
+            { q: 'When does hydroplaning occur?', o: ['Tires lose contact due to water', 'Driving too slow', 'Brakes get wet', 'Engine overheats'], a: 0, ch: 7 },
+            { q: 'When should you yield to pedestrians?', o: ['Only at marked crosswalks', 'Always', 'Only with walk signal', 'Only at intersections'], a: 1, ch: 7 },
+            { q: 'Who is required to wear seat belts in Indiana?', o: ['Front seat only', 'Driver and all passengers', 'Children only', 'Adults only'], a: 1, ch: 7 },
+            { q: 'What restraint must children under 8 use?', o: ['Seat belt only', 'Child restraint system', 'No requirement', 'Lap belt only'], a: 1, ch: 7 },
+            { q: 'What is the speed limit in an alley?', o: ['10 mph', '15 mph', '20 mph', '25 mph'], a: 1, ch: 7 },
+
+            // Chapter 8 - Accidents and Emergencies
+            { q: 'What must you do in an accident?', o: ['Leave immediately', 'Stop and exchange information', 'Only stop if someone is injured', 'Call insurance first'], a: 1, ch: 8 },
+            { q: 'What should you do during a tire blowout?', o: ['Brake hard immediately', 'Hold the wheel firmly and let the car slow', 'Speed up to maintain control', 'Turn sharply to the shoulder'], a: 1, ch: 8 },
+            { q: 'What should you do if your brakes fail?', o: ['Turn off ignition immediately', 'Downshift and pump brakes', 'Pull emergency brake hard suddenly', 'Coast to a stop'], a: 1, ch: 8 },
+            { q: 'What should you do if your vehicle goes into water?', o: ['Try to open the door', 'Open window and exit to roof', 'Stay inside and wait', 'Start the engine'], a: 1, ch: 8 },
+            { q: 'What should you do if your vehicle skids?', o: ['Brake hard', 'Ease off gas and steer in direction of rear', 'Accelerate out of it', 'Turn steering wheel opposite direction'], a: 1, ch: 8 },
+            { q: 'What are symptoms of carbon monoxide poisoning?', o: ['Increased energy', 'Drowsiness and headaches', 'Better vision', 'Increased appetite'], a: 1, ch: 8 },
+            { q: 'What should you do during a police traffic stop?', o: ['Exit immediately to greet officer', 'Keep hands visible and stay in vehicle', 'Argue about the ticket', 'Drive to a police station'], a: 1, ch: 8 },
+            { q: 'How far should you place roadside warning triangles?', o: ['50 feet away', '100 feet in both directions', '200 feet behind only', '10 feet from vehicle'], a: 1, ch: 8 },
+            { q: 'What are signs of an impaired driver?', o: ['Driving at the speed limit', 'Weaving and wide turns', 'Using turn signals properly', 'Maintaining lane position'], a: 1, ch: 8 },
+            { q: 'When should you move your vehicle after an accident?', o: ['Never move it', 'If it blocks traffic and no injuries', 'Only when police tell you', 'Always move immediately'], a: 1, ch: 8 },
+            { q: 'What should you turn away from to avoid a collision?', o: ['The nearest ditch', 'Oncoming traffic', 'The sidewalk', 'Parked cars'], a: 1, ch: 8 },
+            { q: 'What should you do if your wheels go off the pavement?', o: ['Turn sharply back onto road', 'Ease off gas and return gradually', 'Accelerate to regain control', 'Brake hard immediately'], a: 1, ch: 8 },
+            { q: 'What is the most common collision factor in Indiana?', o: ['Speeding', 'Failure to yield', 'Weather conditions', 'Vehicle malfunction'], a: 1, ch: 8 },
+            { q: 'What should you do at an accident with injuries?', o: ['Leave immediately', 'Assist injured and call 911', 'Only call insurance', 'Wait for police to arrive'], a: 1, ch: 8 },
+            { q: 'How can you prevent vehicle theft?', o: ['Leave keys in ignition', 'Remove keys and lock doors', 'Hide keys under floor mat', 'Leave windows cracked'], a: 1, ch: 8 },
+            { q: 'How should you acknowledge a police stop?', o: ['Flash headlights', 'Turn on right turn signal', 'Honk horn', 'Wave at officer'], a: 1, ch: 8 },
+            { q: 'How should you use ABS brakes when skidding?', o: ['Pump the brakes rapidly', 'Apply firm continuous pressure and steer normally', 'Release brakes completely', 'Press and release quickly'], a: 1, ch: 8 },
+            { q: 'What affects blood alcohol concentration?', o: ['Time of day', 'Amount consumed, speed, and body weight', 'Vehicle type', 'Road conditions'], a: 1, ch: 8 }
+        ];
+
+        var state = {
+            section: 'home',
+            quizActive: false,
+            questions: [],
+            current: 0,
+            score: 0,
+            answered: [],
+            showAnswer: false,
+            selected: null,
+            lastScoreAnimated: 0
+        };
+
+        function shuffle(arr) {
+            var shuffled = arr.slice();
+            for (var i = shuffled.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = shuffled[i];
+                shuffled[i] = shuffled[j];
+                shuffled[j] = temp;
+            }
+            return shuffled;
+        }
+
+        function shuffleOptions(question) {
+            var pairs = [];
+            for (var i = 0; i < question.o.length; i++) {
+                pairs.push({ text: question.o[i], wasCorrect: i === question.a });
+            }
+            var shuffledPairs = shuffle(pairs);
+            var newOptions = [];
+            var newAnswerIndex = 0;
+            for (var i = 0; i < shuffledPairs.length; i++) {
+                newOptions.push(shuffledPairs[i].text);
+                if (shuffledPairs[i].wasCorrect) {
+                    newAnswerIndex = i;
+                }
+            }
+            return { q: question.q, o: newOptions, a: newAnswerIndex, ch: question.ch };
+        }
+
+        function createConfetti() {
+            var container = document.getElementById('confetti-container');
+            container.textContent = '';
+            var colors = ['#4a7c59', '#5a9c6a', '#fbbf24', '#e07a5f', '#60a5fa', '#f472b6'];
+
+            for (var i = 0; i < 100; i++) {
+                var confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                confetti.style.animation = 'confettiFall ' + (Math.random() * 2 + 2) + 's ease-out ' + (Math.random() * 0.5) + 's forwards';
+                container.appendChild(confetti);
+            }
+
+            setTimeout(function() {
+                container.textContent = '';
+            }, 4000);
+        }
+
+        function startQuiz() {
+            var ch6 = [];
+            var ch7 = [];
+            var ch8 = [];
+
+            for (var i = 0; i < allQuestions.length; i++) {
+                if (allQuestions[i].ch === 6) ch6.push(allQuestions[i]);
+                if (allQuestions[i].ch === 7) ch7.push(allQuestions[i]);
+                if (allQuestions[i].ch === 8) ch8.push(allQuestions[i]);
+            }
+
+            var pick6 = shuffle(ch6).slice(0, 17);
+            var pick7 = shuffle(ch7).slice(0, 17);
+            var pick8 = shuffle(ch8).slice(0, 16);
+
+            var selected = pick6.concat(pick7).concat(pick8);
+            var shuffledQuestions = shuffle(selected);
+            state.questions = [];
+            for (var i = 0; i < shuffledQuestions.length; i++) {
+                state.questions.push(shuffleOptions(shuffledQuestions[i]));
+            }
+            state.quizActive = true;
+            state.current = 0;
+            state.score = 0;
+            state.answered = [];
+            state.showAnswer = false;
+            state.selected = null;
+            state.lastScoreAnimated = 0;
+            render();
+        }
+
+        function answerQuestion(idx) {
+            if (state.showAnswer) return;
+            state.selected = idx;
+            state.showAnswer = true;
+            var correct = idx === state.questions[state.current].a;
+            if (correct) {
+                state.score++;
+            }
+
+            var answered = {
+                q: state.questions[state.current].q,
+                o: state.questions[state.current].o,
+                a: state.questions[state.current].a,
+                ch: state.questions[state.current].ch,
+                correct: correct,
+                selected: idx
+            };
+            state.answered.push(answered);
+            render();
+
+            // Animate score if correct
+            if (correct) {
+                setTimeout(function() {
+                    var scoreEl = document.getElementById('score-display');
+                    if (scoreEl) {
+                        scoreEl.classList.add('score-pop');
+                        setTimeout(function() {
+                            scoreEl.classList.remove('score-pop');
+                        }, 300);
+                    }
+                }, 100);
+            }
+        }
+
+        function nextQuestion() {
+            if (!state.showAnswer) return;
+
+            if (state.current < state.questions.length - 1) {
+                state.current++;
+                state.showAnswer = false;
+                state.selected = null;
+                render();
+            } else {
+                state.section = 'results';
+                render();
+                // Trigger confetti for passing scores
+                var pct = Math.round((state.score / state.questions.length) * 100);
+                if (pct >= 80) {
+                    setTimeout(createConfetti, 300);
+                }
+            }
+        }
+
+        function prevQuestion() {
+            if (state.current > 0) {
+                state.current--;
+                if (state.answered[state.current]) {
+                    state.showAnswer = true;
+                    state.selected = state.answered[state.current].selected;
+                } else {
+                    state.showAnswer = false;
+                    state.selected = null;
+                }
+                render();
+            }
+        }
+
+        function backToHome() {
+            state.quizActive = false;
+            state.section = 'home';
+            render();
+        }
+
+        function getRecommendations() {
+            var byChapter = {6: 0, 7: 0, 8: 0};
+            for (var i = 0; i < state.answered.length; i++) {
+                if (!state.answered[i].correct) {
+                    byChapter[state.answered[i].ch]++;
+                }
+            }
+
+            var recs = [];
+            if (byChapter[6] > 5) {
+                recs.push({ priority: 'high', text: 'Chapter 6 (Signs) — focus on colors and shapes', link: 'chapter6.html' });
+            } else if (byChapter[6] > 2) {
+                recs.push({ priority: 'medium', text: 'Chapter 6 — review sign meanings', link: 'chapter6.html' });
+            }
+
+            if (byChapter[7] > 7) {
+                recs.push({ priority: 'high', text: 'Chapter 7 (Safe Driving) — markings, limits, rules', link: 'chapter7.html' });
+            } else if (byChapter[7] > 3) {
+                recs.push({ priority: 'medium', text: 'Chapter 7 — review driving rules', link: 'chapter7.html' });
+            }
+
+            if (byChapter[8] > 5) {
+                recs.push({ priority: 'high', text: 'Chapter 8 (Emergencies) — accidents, failures', link: 'chapter8.html' });
+            } else if (byChapter[8] > 2) {
+                recs.push({ priority: 'medium', text: 'Chapter 8 — review emergency procedures', link: 'chapter8.html' });
+            }
+
+            return recs;
+        }
+
+        function render() {
+            var app = document.getElementById('app');
+
+            // Clear existing content
+            while (app.firstChild) {
+                app.removeChild(app.firstChild);
+            }
+
+            if (!state.quizActive) {
+                renderHome(app);
+            } else if (state.section === 'results') {
+                renderResults(app);
+            } else {
+                renderQuestion(app);
+            }
+        }
+
+        function renderHome(app) {
+            var card = createElement('div', 'card p-6 sm:p-8 animate-in');
+
+            // Header section
+            var headerDiv = createElement('div', 'text-center mb-6');
+            var markerWrap = createElement('div', 'inline-block mb-4');
+            var marker = createElement('div', 'mile-marker text-xl');
+            marker.textContent = '50';
+            markerWrap.appendChild(marker);
+            headerDiv.appendChild(markerWrap);
+
+            var title = createElement('h2', 'font-display text-xl sm:text-2xl font-bold text-ink mb-2');
+            title.textContent = 'Ready for the Road?';
+            headerDiv.appendChild(title);
+
+            var subtitle = createElement('p', 'text-slate text-sm sm:text-base');
+            subtitle.innerHTML = '50 questions. Random order.<br>Your journey starts here.';
+            headerDiv.appendChild(subtitle);
+            card.appendChild(headerDiv);
+
+            // Start button
+            var startBtn = createElement('button', 'btn-primary w-full text-base sm:text-lg mb-6');
+            startBtn.textContent = 'Start Your Journey';
+            startBtn.onclick = startQuiz;
+            card.appendChild(startBtn);
+
+            // Route overview
+            var routeDiv = createElement('div', 'bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4 sm:p-5 mb-6');
+            var routeTitle = createElement('p', 'font-semibold text-ink text-sm mb-3 flex items-center gap-2');
+            routeTitle.textContent = 'Route Overview';
+            routeDiv.appendChild(routeTitle);
+
+            var routeList = createElement('ul', 'space-y-2 text-slate text-sm');
+            var chapters = [
+                { num: '6', text: '17 questions on Signs & Signals' },
+                { num: '7', text: '17 questions on Safe Driving' },
+                { num: '8', text: '16 questions on Emergencies' }
+            ];
+            chapters.forEach(function(ch) {
+                var li = createElement('li', 'flex items-center gap-3');
+                var badge = createElement('span', 'w-6 h-6 rounded bg-yellow-100 border-2 border-ink flex items-center justify-center text-xs font-bold');
+                badge.textContent = ch.num;
+                li.appendChild(badge);
+                li.appendChild(document.createTextNode(' ' + ch.text));
+                routeList.appendChild(li);
+            });
+            routeDiv.appendChild(routeList);
+
+            var targetDiv = createElement('div', 'mt-4 pt-4 border-t border-slate-200');
+            var targetText = createElement('p', 'text-sm text-ink font-medium');
+            targetText.innerHTML = 'Target: <span class="text-sage">40/50 (80%)</span> to pass';
+            targetDiv.appendChild(targetText);
+            routeDiv.appendChild(targetDiv);
+            card.appendChild(routeDiv);
+
+            // Study guide links
+            var linksDiv = createElement('div', 'space-y-2');
+            var linksLabel = createElement('p', 'text-xs text-slate uppercase tracking-wide font-semibold mb-2');
+            linksLabel.textContent = 'Study Guides';
+            linksDiv.appendChild(linksLabel);
+
+            var studyLinks = [
+                { href: 'chapter6.html', ch: 'CH 6', text: 'Traffic Signs & Signals' },
+                { href: 'chapter7.html', ch: 'CH 7', text: 'Safe Vehicle Operation' },
+                { href: 'chapter8.html', ch: 'CH 8', text: 'Accidents & Emergencies' }
+            ];
+            studyLinks.forEach(function(link) {
+                var a = createElement('a', 'study-link');
+                a.href = link.href;
+                var icon = createElement('span', 'study-link-icon');
+                icon.textContent = link.ch;
+                a.appendChild(icon);
+                var text = createElement('span', 'text-sm font-medium text-ink');
+                text.textContent = link.text;
+                a.appendChild(text);
+                linksDiv.appendChild(a);
+            });
+            card.appendChild(linksDiv);
+
+            app.appendChild(card);
+        }
+
+        function renderResults(app) {
+            var ch6Correct = 0, ch7Correct = 0, ch8Correct = 0;
+            for (var i = 0; i < state.answered.length; i++) {
+                if (state.answered[i].ch === 6 && state.answered[i].correct) ch6Correct++;
+                if (state.answered[i].ch === 7 && state.answered[i].correct) ch7Correct++;
+                if (state.answered[i].ch === 8 && state.answered[i].correct) ch8Correct++;
+            }
+
+            var total = state.questions.length;
+            var pct = Math.round((state.score / total) * 100);
+            var passed = pct >= 80;
+            var recs = getRecommendations();
+
+            var resultMessage, resultEmoji;
+            if (pct >= 90) { resultMessage = 'Outstanding!'; resultEmoji = '\uD83C\uDFC6'; }
+            else if (pct >= 80) { resultMessage = 'You Passed!'; resultEmoji = '\uD83C\uDF89'; }
+            else if (pct >= 70) { resultMessage = 'Almost There!'; resultEmoji = '\uD83D\uDCAA'; }
+            else { resultMessage = 'Keep Practicing'; resultEmoji = '\uD83D\uDCDA'; }
+
+            var card = createElement('div', 'card p-6 sm:p-8 animate-in');
+
+            // Emoji
+            var emojiDiv = createElement('div', 'text-center mb-2');
+            var emoji = createElement('span', 'text-4xl animate-bounce inline-block');
+            emoji.textContent = resultEmoji;
+            emojiDiv.appendChild(emoji);
+            card.appendChild(emojiDiv);
+
+            // Title
+            var title = createElement('h2', 'font-display text-xl sm:text-2xl font-bold text-ink text-center mb-6');
+            title.textContent = resultMessage;
+            card.appendChild(title);
+
+            // Score ring
+            var ringWrap = createElement('div', 'flex justify-center mb-6');
+            var ring = createElement('div', 'score-ring');
+            ring.style.setProperty('--pct', pct + '%');
+            var ringInner = createElement('div', 'score-ring-inner');
+            var scoreNum = createElement('span', 'font-display text-3xl font-bold text-ink');
+            scoreNum.textContent = state.score + '/' + total;
+            ringInner.appendChild(scoreNum);
+            var scorePct = createElement('span', 'text-slate text-sm font-medium');
+            scorePct.textContent = pct + '%';
+            ringInner.appendChild(scorePct);
+            ring.appendChild(ringInner);
+            ringWrap.appendChild(ring);
+            card.appendChild(ringWrap);
+
+            // Pass/fail badge
+            var badgeWrap = createElement('div', 'text-center mb-6');
+            var badge = createElement('span', passed ? 'inline-block bg-sage/10 text-sage font-semibold px-4 py-2 rounded-full text-sm' : 'inline-block bg-coral/10 text-coral font-semibold px-4 py-2 rounded-full text-sm');
+            badge.textContent = passed ? 'Ready for the real test!' : 'Need 80% to pass — keep going!';
+            badgeWrap.appendChild(badge);
+            card.appendChild(badgeWrap);
+
+            // Chapter breakdown
+            var breakdownDiv = createElement('div', 'bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4 mb-4');
+            var breakdownTitle = createElement('p', 'font-semibold text-ink text-sm mb-3');
+            breakdownTitle.textContent = 'Score by Chapter';
+            breakdownDiv.appendChild(breakdownTitle);
+
+            var barsDiv = createElement('div', 'space-y-3');
+            var chapterData = [
+                { name: 'Ch 6 — Signs', correct: ch6Correct, total: 17 },
+                { name: 'Ch 7 — Safe Driving', correct: ch7Correct, total: 17 },
+                { name: 'Ch 8 — Emergencies', correct: ch8Correct, total: 16 }
+            ];
+            chapterData.forEach(function(ch) {
+                var chPct = Math.round((ch.correct / ch.total) * 100);
+                var chDiv = createElement('div', '');
+                var labelRow = createElement('div', 'flex justify-between text-sm mb-1');
+                var labelName = createElement('span', 'text-slate');
+                labelName.textContent = ch.name;
+                labelRow.appendChild(labelName);
+                var labelScore = createElement('span', 'font-semibold text-ink');
+                labelScore.textContent = ch.correct + '/' + ch.total;
+                labelRow.appendChild(labelScore);
+                chDiv.appendChild(labelRow);
+                var barBg = createElement('div', 'h-2 bg-slate-200 rounded-full overflow-hidden');
+                var barFill = createElement('div', 'h-full bg-sage rounded-full');
+                barFill.style.width = chPct + '%';
+                barBg.appendChild(barFill);
+                chDiv.appendChild(barBg);
+                barsDiv.appendChild(chDiv);
+            });
+            breakdownDiv.appendChild(barsDiv);
+            card.appendChild(breakdownDiv);
+
+            // Recommendations
+            if (recs.length > 0) {
+                var recDiv = createElement('div', 'bg-coral/5 border-l-4 border-coral rounded-r-xl p-4 mb-6');
+                var recTitle = createElement('p', 'font-semibold text-ink text-sm mb-2');
+                recTitle.textContent = 'Focus Areas';
+                recDiv.appendChild(recTitle);
+                var recList = createElement('ul', 'space-y-2 text-sm');
+                recs.forEach(function(rec) {
+                    var li = createElement('li', 'flex items-start gap-2');
+                    var bullet = createElement('span', rec.priority === 'high' ? 'text-coral' : 'text-slate');
+                    bullet.textContent = '\u2022';
+                    li.appendChild(bullet);
+                    var link = createElement('a', 'text-slate hover:text-sage hover:underline');
+                    link.href = rec.link;
+                    link.textContent = rec.text;
+                    li.appendChild(link);
+                    recList.appendChild(li);
+                });
+                recDiv.appendChild(recList);
+                card.appendChild(recDiv);
+            } else {
+                var successDiv = createElement('div', 'bg-sage/5 border-l-4 border-sage rounded-r-xl p-4 mb-6');
+                var successText = createElement('p', 'text-sm text-sage font-medium');
+                successText.textContent = 'Excellent work! Strong understanding across all chapters.';
+                successDiv.appendChild(successText);
+                card.appendChild(successDiv);
+            }
+
+            // Buttons
+            var btnDiv = createElement('div', 'flex flex-col sm:flex-row gap-3');
+            var retryBtn = createElement('button', 'btn-primary flex-1');
+            retryBtn.textContent = 'Try Again';
+            retryBtn.onclick = startQuiz;
+            btnDiv.appendChild(retryBtn);
+            var homeBtn = createElement('button', 'btn-secondary flex-1');
+            homeBtn.textContent = 'Home';
+            homeBtn.onclick = backToHome;
+            btnDiv.appendChild(homeBtn);
+            card.appendChild(btnDiv);
+
+            app.appendChild(card);
+        }
+
+        function renderQuestion(app) {
+            var q = state.questions[state.current];
+            var totalQuestions = state.questions.length;
+            var progress = ((state.current + 1) / totalQuestions) * 100;
+
+            var card = createElement('div', 'card p-4 sm:p-6 animate-in');
+
+            // Header
+            var headerDiv = createElement('div', 'flex items-center justify-between mb-4');
+            var leftDiv = createElement('div', 'flex items-center gap-3');
+            var marker = createElement('div', 'mile-marker');
+            marker.textContent = state.current + 1;
+            leftDiv.appendChild(marker);
+            var ofText = createElement('span', 'text-slate text-sm');
+            ofText.textContent = 'of ' + totalQuestions;
+            leftDiv.appendChild(ofText);
+            headerDiv.appendChild(leftDiv);
+            var chBadge = createElement('span', 'chapter-badge');
+            chBadge.textContent = 'CH ' + q.ch;
+            headerDiv.appendChild(chBadge);
+            card.appendChild(headerDiv);
+
+            // Progress bar
+            var progressDiv = createElement('div', 'progress-bar mb-5');
+            var progressFill = createElement('div', 'progress-fill');
+            progressFill.style.width = progress + '%';
+            progressDiv.appendChild(progressFill);
+            card.appendChild(progressDiv);
+
+            // Question
+            var qDiv = createElement('div', 'bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4 sm:p-5 mb-5');
+            var qText = createElement('h3', 'font-semibold text-ink text-base sm:text-lg leading-snug');
+            qText.textContent = q.q;
+            qDiv.appendChild(qText);
+            card.appendChild(qDiv);
+
+            // Options
+            var optionsDiv = createElement('div', 'space-y-3 mb-5');
+            for (var i = 0; i < q.o.length; i++) {
+                (function(idx) {
+                    var btnClass = 'option-btn w-full';
+                    if (!state.showAnswer) {
+                        btnClass += ' option-stagger-' + idx;
+                    }
+                    if (state.showAnswer) {
+                        if (idx === q.a) btnClass += ' correct';
+                        else if (idx === state.selected) btnClass += ' incorrect';
+                        else btnClass += ' neutral';
+                    }
+
+                    var btn = createElement('button', btnClass);
+                    if (state.showAnswer) btn.disabled = true;
+                    btn.onclick = function() { answerQuestion(idx); };
+
+                    var innerSpan = createElement('span', 'inline-flex items-center gap-3');
+                    var letterSpan = createElement('span', 'w-6 h-6 rounded-full bg-slate-100 text-slate text-xs font-bold flex items-center justify-center');
+                    letterSpan.textContent = String.fromCharCode(65 + idx);
+                    innerSpan.appendChild(letterSpan);
+                    var textSpan = createElement('span', '');
+                    textSpan.textContent = q.o[idx];
+                    innerSpan.appendChild(textSpan);
+                    btn.appendChild(innerSpan);
+                    optionsDiv.appendChild(btn);
+                })(i);
+            }
+            card.appendChild(optionsDiv);
+
+            // Navigation
+            var navDiv = createElement('div', 'flex items-center justify-between gap-3');
+
+            var prevBtn = createElement('button', 'btn-secondary px-4' + (state.current === 0 ? ' opacity-40 pointer-events-none' : ''));
+            prevBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>';
+            prevBtn.onclick = prevQuestion;
+            navDiv.appendChild(prevBtn);
+
+            var scoreDiv = createElement('div', 'text-center');
+            var scoreSpan = createElement('span', 'text-ink font-semibold');
+            scoreSpan.id = 'score-display';
+            scoreSpan.textContent = state.score;
+            scoreDiv.appendChild(scoreSpan);
+            var correctText = document.createTextNode(' correct');
+            scoreDiv.appendChild(correctText);
+            navDiv.appendChild(scoreDiv);
+
+            var nextBtn = createElement('button', 'btn-primary px-4' + (!state.showAnswer ? ' opacity-40 pointer-events-none' : ''));
+            if (state.current === totalQuestions - 1) {
+                nextBtn.textContent = 'Finish';
+            } else {
+                nextBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
+            }
+            nextBtn.onclick = nextQuestion;
+            navDiv.appendChild(nextBtn);
+
+            card.appendChild(navDiv);
+            app.appendChild(card);
+        }
+
+        function createElement(tag, className) {
+            var el = document.createElement(tag);
+            if (className) el.className = className;
+            return el;
+        }
+
+        render();
+    </script>
+</body>
+</html>

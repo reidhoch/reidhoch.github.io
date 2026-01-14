@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Accidents & Emergencies | Indiana Permit Study Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        ink: '#1a1a2e',
+                        cream: '#faf9f7',
+                        sage: '#4a7c59',
+                        coral: '#e07a5f',
+                        slate: '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
+
+        /* Textured background */
+        body {
+            background-color: #faf9f7;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.06),
+                0 8px 24px rgba(0,0,0,0.04),
+                0 20px 48px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.08),
+                0 12px 32px rgba(0,0,0,0.06),
+                0 24px 56px rgba(0,0,0,0.04);
+        }
+
+        .section-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(250, 249, 247, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .nav-pill {
+            padding: 0.5rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+            color: #64748b;
+        }
+        .nav-pill:hover { background: white; color: #1a1a2e; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .nav-pill.active { background: linear-gradient(135deg, #4a7c59, #5a9c6a); color: white; box-shadow: 0 2px 8px rgba(74,124,89,0.3); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeIn 0.4s ease-out; }
+
+        html { scroll-behavior: smooth; }
+
+        .key-point {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border-left: 4px solid #4a7c59;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7, #fef9c3);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-left: 4px solid #ef4444;
+        }
+
+        .emergency-box {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .step-number {
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a7c59, #5a9c6a);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(74,124,89,0.3);
+        }
+
+        /* Road sign header badge */
+        .chapter-sign {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fef3c7;
+            border: 3px solid #1a1a2e;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #1a1a2e;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Quiz CTA button */
+        .cta-btn {
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6649 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .cta-btn:hover::before { left: 100%; }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-cream min-h-screen">
+    <!-- Navigation -->
+    <nav class="section-nav border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between gap-4">
+                <a href="knowledge_quiz.html" class="text-sage font-semibold text-sm hover:underline">← Back to Quiz</a>
+                <span class="text-slate text-sm hidden sm:block">Chapter 8 Study Guide</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Navigation -->
+    <div class="section-nav border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-2">
+            <div class="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-hide">
+                <a href="#accidents" class="nav-pill">Accidents</a>
+                <a href="#avoiding" class="nav-pill">Avoiding</a>
+                <a href="#emergencies" class="nav-pill">Emergencies</a>
+                <a href="#equipment" class="nav-pill">Equipment</a>
+                <a href="#stops" class="nav-pill">Traffic Stops</a>
+                <a href="#impaired" class="nav-pill">Impaired</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-4 py-6 sm:py-10">
+        <!-- Header -->
+        <header class="text-center mb-8 animate-in">
+            <div class="inline-block mb-4">
+                <span class="chapter-sign">
+                    <span>CH</span>
+                    <span class="text-lg">8</span>
+                </span>
+            </div>
+            <h1 class="font-display text-2xl sm:text-4xl font-bold text-ink leading-tight mb-2">Accidents &amp; Emergencies</h1>
+            <p class="text-slate">Indiana Driver's Manual</p>
+        </header>
+
+        <!-- Introduction -->
+        <section class="card p-5 sm:p-6 mb-6 animate-in">
+            <p class="text-ink leading-relaxed">
+                Among all collisions in Indiana, <strong>failure to yield the right of way</strong> is the most common factor. Accidents are often caused by a driver's lack of attention or failure to observe the rules of the road.
+            </p>
+        </section>
+
+        <!-- What To Do After an Accident -->
+        <section id="accidents" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">What To Do After an Accident</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-4">Legal Requirements</h3>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <div class="step-number">1</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Stop Immediately</p>
+                            <p class="text-sm text-slate">Stop as close to the scene as possible without obstructing traffic.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">2</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Remain at the Scene</p>
+                            <p class="text-sm text-slate">Stay and provide your name, address, registration, and show your driver's license.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">3</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Provide Assistance</p>
+                            <p class="text-sm text-slate">Help injured persons as directed by law enforcement, medical personnel, or 911.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">4</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Contact Law Enforcement</p>
+                            <p class="text-sm text-slate">Notify police, sheriff, or state police as soon as possible.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-point rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-ink mb-2">Should You Move Your Vehicle?</h3>
+                <p class="text-sm text-slate mb-2"><strong>Yes</strong> — Move off the highway to a location close to the accident if:</p>
+                <ul class="text-sm text-slate ml-4 space-y-1">
+                    <li>• The accident is on the traveled portion of the highway</li>
+                    <li>• No one is injured, killed, or trapped</li>
+                    <li>• No hazardous materials are involved</li>
+                </ul>
+                <p class="text-sm text-slate mt-2"><strong>Do NOT move</strong> if there is injury, death, entrapment, or hazardous materials.</p>
+            </div>
+
+            <div class="card p-4">
+                <h3 class="font-semibold text-ink mb-2">Hit an Unattended Vehicle or Property?</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Stop and remain at the scene</li>
+                    <li>• Take reasonable steps to notify the owner</li>
+                    <li>• If owner cannot be found, call law enforcement</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Avoiding Collisions -->
+        <section id="avoiding" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Avoiding Collisions</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Three Options to Avoid a Collision</h3>
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="bg-cream rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">🛑</div>
+                        <p class="font-semibold text-ink text-sm">Stop Quickly</p>
+                        <p class="text-xs text-slate mt-1">If you have enough distance</p>
+                    </div>
+                    <div class="bg-cream rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">↩️</div>
+                        <p class="font-semibold text-ink text-sm">Turn Quickly</p>
+                        <p class="text-xs text-slate mt-1">If you can't stop in time</p>
+                    </div>
+                    <div class="bg-cream rounded-lg p-4 text-center">
+                        <div class="text-2xl mb-2">⏩</div>
+                        <p class="font-semibold text-ink text-sm">Speed Up</p>
+                        <p class="text-xs text-slate mt-1">Sometimes the only option</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-ink mb-2">If a Collision is Unavoidable</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Turn <strong>away from oncoming traffic</strong>, even if it means leaving the road</li>
+                    <li>• <strong>Drive</strong> off the road rather than skid — you'll have more control</li>
+                    <li>• Hit something that will <strong>give way</strong> (brush, shrubs) rather than something hard</li>
+                    <li>• Hit something <strong>moving in your direction</strong> rather than stationary</li>
+                    <li>• A <strong>sideswipe</strong> is safer than a head-on collision</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Wheels Off the Pavement</h3>
+                <div class="danger-box rounded-lg p-3">
+                    <p class="text-sm text-ink"><strong>Do NOT</strong> turn back onto the pavement right away — this could throw your vehicle off balance.</p>
+                </div>
+                <div class="key-point rounded-lg p-3 mt-3">
+                    <p class="text-sm text-ink"><strong>Instead:</strong> Drive along the shoulder, ease off the gas, slow down, then turn back onto the road gradually.</p>
+                </div>
+            </div>
+
+            <div class="emergency-box rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-3">Vehicle in Water</h3>
+                <p class="text-sm text-slate mb-3">A vehicle will usually float for several minutes before sinking.</p>
+                <ol class="text-sm text-slate space-y-2 list-decimal list-inside">
+                    <li><strong>Do NOT open the door</strong> — water pressure makes it nearly impossible and will flood the vehicle</li>
+                    <li>Remove your seat belt</li>
+                    <li>Open a window (automatic windows may still work)</li>
+                    <li>Get children out of restraints, move everyone to front seats</li>
+                    <li>Exit through window and move to the roof</li>
+                    <li>Call 911, locate nearest dry land</li>
+                    <li>Swim for shore only as a last resort</li>
+                    <li><strong>Never</strong> re-enter the vehicle for possessions</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Roadside Emergencies -->
+        <section id="emergencies" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Roadside Emergencies</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Safety Guidelines</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li>• Pull onto the roadside <strong>shoulder</strong> if possible</li>
+                    <li>• Turn on <strong>hazard lights</strong></li>
+                    <li>• Keep a flashlight with fresh batteries within reach</li>
+                    <li>• Store a reflective safety vest and red emergency triangle</li>
+                    <li>• Exit on the <strong>passenger side</strong> after checking for traffic</li>
+                </ul>
+            </div>
+
+            <div class="key-point rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Warning Triangle Placement</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Normal conditions: <strong>200 feet</strong> behind your vehicle</li>
+                    <li>• On a hill or curve: <strong>500 feet</strong> behind your vehicle</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Vehicle Equipment Failures -->
+        <section id="equipment" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Vehicle Equipment Failures</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Tire Blowout</h3>
+                <ol class="text-sm text-slate space-y-2">
+                    <li><span class="font-medium text-ink">1.</span> Hold the steering wheel <strong>firmly</strong> and keep the car straight</li>
+                    <li><span class="font-medium text-ink">2.</span> Take foot off gas — <strong>do NOT brake</strong></li>
+                    <li><span class="font-medium text-ink">3.</span> Let the car slow down gradually</li>
+                    <li><span class="font-medium text-ink">4.</span> Pull off the road</li>
+                    <li><span class="font-medium text-ink">5.</span> Apply brakes only when the car is almost stopped</li>
+                </ol>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Brake Failure</h3>
+                <ol class="text-sm text-slate space-y-2">
+                    <li><span class="font-medium text-ink">1.</span> Shift to a <strong>lower gear</strong></li>
+                    <li><span class="font-medium text-ink">2.</span> <strong>Pump the brake pedal</strong> fast and hard — this may build pressure</li>
+                    <li><span class="font-medium text-ink">3.</span> Try the <strong>parking brake</strong> — hold the release to avoid skidding</li>
+                    <li><span class="font-medium text-ink">4.</span> Look for a safe place to stop off the road</li>
+                    <li><span class="font-medium text-ink">5.</span> After stopping, <strong>call for help</strong> — do not drive</li>
+                </ol>
+            </div>
+
+            <div class="danger-box rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Never Turn Off the Ignition While Moving</h3>
+                <p class="text-sm text-slate">On vehicles with steering wheel interlock systems, turning the ignition to "lock" while moving will cause the steering to lock when you turn the wheel, resulting in loss of control.</p>
+            </div>
+        </section>
+
+        <!-- Traffic Stops -->
+        <section id="stops" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Traffic Stops by Law Enforcement</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-4">What To Do When Pulled Over</h3>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <div class="step-number">1</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Acknowledge with Right Turn Signal</p>
+                            <p class="text-sm text-slate">This lets the officer know you see them.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">2</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Pull to the Right Shoulder</p>
+                            <p class="text-sm text-slate">Never stop on the center median. Find a well-lit area if possible.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">3</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Turn Off Radio, End Phone Calls</p>
+                            <p class="text-sm text-slate">Give the officer your full attention.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">4</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Stay in Vehicle, Hands Visible</p>
+                            <p class="text-sm text-slate">Driver: hands on steering wheel. Passengers: hands on laps.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">5</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Roll Down Tinted Windows</p>
+                            <p class="text-sm text-slate">If windows are tinted, roll them down before officer approaches.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">6</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Inform Before Reaching</p>
+                            <p class="text-sm text-slate">Tell the officer where your documents are before reaching for them.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-ink mb-2">If You Cannot Pull Over Immediately</h3>
+                <p class="text-sm text-slate">Slow down and turn on your <strong>hazard lights</strong> to show you acknowledge the officer and are looking for a safe place to stop.</p>
+            </div>
+
+            <div class="danger-box rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Do NOT</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Exit your vehicle unless directed by the officer</li>
+                    <li>• Argue or debate with the officer at the scene</li>
+                    <li>• Refuse to sign a ticket (signing is not an admission of guilt)</li>
+                    <li>• Refuse breath, blood, or performance tests (can result in license suspension)</li>
+                    <li>• Resist arrest if taken into custody</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Impaired Driving -->
+        <section id="impaired" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Impaired Driving</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Blood Alcohol Concentration (BAC)</h3>
+                <p class="text-sm text-slate mb-3">Primary factors that determine BAC:</p>
+                <div class="grid sm:grid-cols-3 gap-3">
+                    <div class="bg-cream rounded-lg p-3 text-center">
+                        <p class="font-semibold text-ink text-sm">Amount</p>
+                        <p class="text-xs text-slate">How much alcohol consumed</p>
+                    </div>
+                    <div class="bg-cream rounded-lg p-3 text-center">
+                        <p class="font-semibold text-ink text-sm">Speed</p>
+                        <p class="text-xs text-slate">How quickly consumed</p>
+                    </div>
+                    <div class="bg-cream rounded-lg p-3 text-center">
+                        <p class="font-semibold text-ink text-sm">Body Weight</p>
+                        <p class="text-xs text-slate">Individual's weight</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Signs of an Impaired Driver</h3>
+                <div class="grid grid-cols-2 gap-2 text-sm text-slate">
+                    <div>• Makes wide turns</div>
+                    <div>• Weaves or straddles lines</div>
+                    <div>• Drives unusually slow</div>
+                    <div>• Comes close to objects</div>
+                    <div>• Swerves or drifts</div>
+                    <div>• Follows too closely</div>
+                    <div>• Stops for no reason</div>
+                    <div>• Turns abruptly/illegally</div>
+                    <div>• Signals inconsistently</div>
+                    <div>• No headlights at night</div>
+                </div>
+            </div>
+
+            <div class="warning-box rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Prescription & Over-the-Counter Drugs</h3>
+                <p class="text-sm text-slate">Many medications impair your ability to drive safely. Always check labels and consult a physician or pharmacist before driving.</p>
+            </div>
+        </section>
+
+        <!-- Carbon Monoxide -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Carbon Monoxide Poisoning</h2>
+
+            <div class="danger-box rounded-xl p-5 mb-4">
+                <p class="text-sm text-ink mb-3"><strong>You cannot see, smell, or taste carbon monoxide.</strong></p>
+                <h3 class="font-semibold text-ink mb-2">Symptoms</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Drowsiness or dizziness</li>
+                    <li>• Bluish tinge to skin or lips</li>
+                    <li>• Headache</li>
+                    <li>• Increased sensitivity to light</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Prevention</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li>• Have exhaust system checked regularly</li>
+                    <li>• Be alert for unusual roar from under the car</li>
+                    <li>• <strong>Never</strong> run engine in a closed garage</li>
+                    <li>• In heavy traffic, close the fresh-air vent</li>
+                    <li>• On highways in cold weather, open the fresh-air vent</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Avoiding Vehicle Theft -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Preventing Vehicle Theft</h2>
+
+            <div class="card p-5 sm:p-6">
+                <ul class="text-sm text-slate space-y-2">
+                    <li>• <strong>Remove keys</strong> and always lock doors</li>
+                    <li>• Do not hide a second set of keys in or around the vehicle</li>
+                    <li>• Park with front wheels turned sharply and apply emergency brake</li>
+                    <li>• Never leave vehicle running unattended</li>
+                    <li>• Consider installing an anti-theft device</li>
+                    <li>• Park in well-lit, well-patrolled areas</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Quick Reference -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Quick Reference</h2>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">Tire Blowout</h3>
+                    <p class="text-xs text-slate">Hold wheel firm, don't brake, slow gradually, then pull over</p>
+                </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">Brake Failure</h3>
+                    <p class="text-xs text-slate">Downshift, pump brakes, try parking brake</p>
+                </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">Vehicle in Water</h3>
+                    <p class="text-xs text-slate">Don't open door, open window, exit to roof</p>
+                </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">Wheels Off Pavement</h3>
+                    <p class="text-xs text-slate">Don't turn sharply, ease off gas, return gradually</p>
+                </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">Police Stop</h3>
+                    <p class="text-xs text-slate">Right signal, pull right, hands visible, stay in car</p>
+                </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">CO Poisoning Signs</h3>
+                    <p class="text-xs text-slate">Drowsiness, headache, blue skin, light sensitivity</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz CTA -->
+        <section class="card p-6 sm:p-8 text-center mb-8">
+            <h2 class="font-display text-xl font-bold text-ink mb-2">Ready to Test Your Knowledge?</h2>
+            <p class="text-slate text-sm mb-4">Take the 50-question practice quiz covering Chapters 6, 7, and 8.</p>
+            <a href="knowledge_quiz.html" class="cta-btn">Start Practice Quiz</a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-slate text-sm">
+            <p>Based on the Indiana Driver's Manual, Chapter 8</p>
+            <p class="mt-1">Source: <a href="https://www.in.gov/bmv/" class="text-sage hover:underline">Indiana BMV</a></p>
+        </footer>
+    </main>
+
+    <script>
+        var sections = document.querySelectorAll('section[id]');
+        var navLinks = document.querySelectorAll('.nav-pill');
+
+        function highlightNav() {
+            var scrollPos = window.scrollY + 150;
+            sections.forEach(function(section) {
+                var top = section.offsetTop;
+                var bottom = top + section.offsetHeight;
+                var id = section.getAttribute('id');
+                if (scrollPos >= top && scrollPos < bottom) {
+                    navLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNav);
+        highlightNav();
+    </script>
+</body>
+</html>

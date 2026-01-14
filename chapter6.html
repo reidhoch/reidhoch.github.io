@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Traffic Signs & Signals | Indiana Permit Study Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        ink: '#1a1a2e',
+                        cream: '#faf9f7',
+                        sage: '#4a7c59',
+                        coral: '#e07a5f',
+                        slate: '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
+
+        /* Textured background */
+        body {
+            background-color: #faf9f7;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.06),
+                0 8px 24px rgba(0,0,0,0.04),
+                0 20px 48px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.08),
+                0 12px 32px rgba(0,0,0,0.06),
+                0 24px 56px rgba(0,0,0,0.04);
+        }
+
+        .sign-color {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .sign-shape {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(250, 249, 247, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .nav-pill {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+            color: #64748b;
+        }
+        .nav-pill:hover { background: white; color: #1a1a2e; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .nav-pill.active { background: linear-gradient(135deg, #4a7c59, #5a9c6a); color: white; box-shadow: 0 2px 8px rgba(74,124,89,0.3); }
+
+        .signal-light {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            border: 3px solid #374151;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeIn 0.4s ease-out; }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .key-point {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border-left: 4px solid #4a7c59;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7, #fef9c3);
+            border-left: 4px solid #f59e0b;
+        }
+
+        /* Road sign header badge */
+        .chapter-sign {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fef3c7;
+            border: 3px solid #1a1a2e;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #1a1a2e;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Section headers with road theme */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            color: #fbbf24;
+            font-weight: 700;
+            font-size: 0.75rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* Staggered card animations */
+        .card-stagger { opacity: 0; animation: slideInLeft 0.3s ease-out forwards; }
+        .card-stagger:nth-child(1) { animation-delay: 0ms; }
+        .card-stagger:nth-child(2) { animation-delay: 50ms; }
+        .card-stagger:nth-child(3) { animation-delay: 100ms; }
+        .card-stagger:nth-child(4) { animation-delay: 150ms; }
+        .card-stagger:nth-child(5) { animation-delay: 200ms; }
+        .card-stagger:nth-child(6) { animation-delay: 250ms; }
+        .card-stagger:nth-child(7) { animation-delay: 300ms; }
+        .card-stagger:nth-child(8) { animation-delay: 350ms; }
+
+        /* Quiz CTA button */
+        .cta-btn {
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6649 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .cta-btn:hover::before { left: 100%; }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-cream min-h-screen">
+    <!-- Navigation -->
+    <nav class="section-nav border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between gap-4">
+                <a href="knowledge_quiz.html" class="text-sage font-semibold text-sm hover:underline">← Back to Quiz</a>
+                <span class="text-slate text-sm hidden sm:block">Chapter 6 Study Guide</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Navigation -->
+    <div class="section-nav border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-2">
+            <div class="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-hide">
+                <a href="#colors" class="nav-pill">Colors</a>
+                <a href="#shapes" class="nav-pill">Shapes</a>
+                <a href="#warning" class="nav-pill">Warning</a>
+                <a href="#regulation" class="nav-pill">Regulation</a>
+                <a href="#signals" class="nav-pill">Signals</a>
+                <a href="#pedestrian" class="nav-pill">Pedestrian</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-4 py-6 sm:py-10">
+        <!-- Header -->
+        <header class="text-center mb-8 animate-in">
+            <div class="inline-block mb-4">
+                <span class="chapter-sign">
+                    <span>CH</span>
+                    <span class="text-lg">6</span>
+                </span>
+            </div>
+            <h1 class="font-display text-2xl sm:text-4xl font-bold text-ink leading-tight mb-2">Traffic Signs &amp; Signals</h1>
+            <p class="text-slate">Indiana Driver's Manual</p>
+        </header>
+
+        <!-- Introduction -->
+        <section class="card p-5 sm:p-6 mb-6 animate-in">
+            <p class="text-ink leading-relaxed">
+                Traffic signs control traffic flow, making streets and highways safe for drivers, bicyclists, and pedestrians. Signs use <strong>colors</strong>, <strong>shapes</strong>, <strong>written messages</strong>, and <strong>symbols</strong> to help drivers quickly understand information.
+            </p>
+        </section>
+
+        <!-- Sign Colors -->
+        <section id="colors" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Sign Colors</h2>
+            <p class="text-slate mb-4">The background color identifies the type of information displayed.</p>
+
+            <div class="space-y-3">
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color bg-red-600"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Red</h3>
+                        <p class="text-slate text-sm">Stop, yield, or prohibited actions. Requires immediate action to avoid threats to safety.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color bg-orange-500"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Orange</h3>
+                        <p class="text-slate text-sm">Temporary traffic conditions — construction zones and maintenance projects.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color bg-yellow-400"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Yellow</h3>
+                        <p class="text-slate text-sm">Warning — prepares drivers for specific road conditions and hazards ahead.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color" style="background: #c0ff00;"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Fluorescent Yellow-Green</h3>
+                        <p class="text-slate text-sm">Schools, pedestrians, bicycles, playgrounds, and school bus routes.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color bg-green-600"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Green</h3>
+                        <p class="text-slate text-sm">Permitted movements, directions, guidance — highway entrances/exits, distances.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color bg-blue-600"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Blue</h3>
+                        <p class="text-slate text-sm">Road services and information — amenities at upcoming exits.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color bg-amber-800"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Brown</h3>
+                        <p class="text-slate text-sm">Recreational and cultural interest sites — state parks, historical markers.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-color bg-white border-2 border-gray-300"></div>
+                    <div>
+                        <h3 class="font-semibold text-ink">White</h3>
+                        <p class="text-slate text-sm">Traffic regulations that drivers must obey — speed limits, "No Turn on Red."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sign Shapes -->
+        <section id="shapes" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Sign Shapes</h2>
+            <p class="text-slate mb-4">The shape also indicates the type of information displayed.</p>
+
+            <div class="space-y-3">
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-shape">
+                        <div class="w-10 h-10 bg-red-600 rotate-45" style="clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); transform: none;"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Octagon (8-sided)</h3>
+                        <p class="text-slate text-sm">Stop — you must stop and yield the appropriate right of way.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-shape">
+                        <div class="w-0 h-0 border-l-[20px] border-r-[20px] border-t-[35px] border-l-transparent border-r-transparent border-t-red-600"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Triangle (pointing down)</h3>
+                        <p class="text-slate text-sm">Yield — slow down, be prepared to stop for other vehicles or pedestrians.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-shape">
+                        <div class="w-10 h-10 bg-yellow-400 rounded-full"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Circle</h3>
+                        <p class="text-slate text-sm">Railroad crossing ahead — be alert for trains.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-shape">
+                        <div class="w-10 h-10 bg-yellow-400 rotate-45"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Diamond</h3>
+                        <p class="text-slate text-sm">Warning — upcoming road conditions and hazards.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-shape">
+                        <div class="w-10 h-8 bg-yellow-400" style="clip-path: polygon(50% 0%, 100% 38%, 81% 100%, 19% 100%, 0% 38%);"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Pentagon (5-sided)</h3>
+                        <p class="text-slate text-sm">School zone — children may be crossing the road.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-shape">
+                        <div class="w-10 h-6 bg-yellow-400" style="clip-path: polygon(0% 50%, 100% 0%, 100% 100%);"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Pennant</h3>
+                        <p class="text-slate text-sm">No passing zone — posted on left side of two-way roads.</p>
+                    </div>
+                </div>
+
+                <div class="card p-4 flex items-start gap-4">
+                    <div class="sign-shape">
+                        <div class="w-8 h-10 bg-white border-2 border-gray-400 rounded-sm"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-ink">Rectangle</h3>
+                        <p class="text-slate text-sm">Regulations, route markers, destination info, or advisory speeds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Warning Signs -->
+        <section id="warning" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Warning Signs</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Common Warning Signs</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm text-slate">
+                    <div>• Curve Ahead</div>
+                    <div>• Deer Crossing</div>
+                    <div>• Slippery When Wet</div>
+                    <div>• Merging Traffic</div>
+                    <div>• Lane Ends</div>
+                    <div>• Two-Way Traffic</div>
+                    <div>• Stop Ahead</div>
+                    <div>• Yield Ahead</div>
+                    <div>• Signal Ahead</div>
+                    <div>• Steep Grade</div>
+                    <div>• Low Clearance</div>
+                    <div>• Narrow Bridge</div>
+                </div>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4 border-l-4 border-orange-500">
+                <h3 class="font-semibold text-ink mb-2">Construction Zone Signs</h3>
+                <p class="text-slate text-sm mb-3">Orange signs warn of temporary conditions. Watch for:</p>
+                <div class="grid grid-cols-2 gap-2 text-sm text-slate">
+                    <div>• Flagger Ahead</div>
+                    <div>• Road Work Ahead</div>
+                    <div>• Detour</div>
+                    <div>• Lane Closed</div>
+                    <div>• Work Crew Ahead</div>
+                    <div>• Worksite Speed Limit</div>
+                </div>
+            </div>
+
+            <div class="card p-5 sm:p-6 border-l-4 border-yellow-400">
+                <h3 class="font-semibold text-ink mb-2">Railroad Signs</h3>
+                <p class="text-slate text-sm">Circular yellow signs and crossbuck (X-shaped) signs alert drivers to upcoming railroad crossings. Always be prepared to stop.</p>
+            </div>
+        </section>
+
+        <!-- Regulation Signs -->
+        <section id="regulation" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Regulation Signs</h2>
+            <p class="text-slate mb-4">These signs display rules drivers must obey.</p>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Speed Signs</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• Speed Limit</li>
+                        <li>• Minimum Speed</li>
+                        <li>• Speed Zone Ahead</li>
+                        <li>• Advisory Speed (curves/ramps)</li>
+                    </ul>
+                </div>
+
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Movement Signs</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• No Left/Right Turn</li>
+                        <li>• No U-Turn</li>
+                        <li>• No Turn on Red</li>
+                        <li>• One Way</li>
+                    </ul>
+                </div>
+
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Lane Signs</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• Left Lane Must Turn Left</li>
+                        <li>• Right Lane Only</li>
+                        <li>• Keep Right</li>
+                        <li>• Do Not Pass</li>
+                    </ul>
+                </div>
+
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Other Regulations</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• Do Not Enter</li>
+                        <li>• Wrong Way</li>
+                        <li>• No Parking</li>
+                        <li>• Stop Here on Red</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Traffic Signals -->
+        <section id="signals" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Traffic Signals</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-4">Steady Lights</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="signal-light bg-green-500"></div>
+                        <div>
+                            <span class="font-semibold text-ink">Green</span>
+                            <p class="text-slate text-sm">Go — you have the right of way if the intersection is clear.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="signal-light bg-yellow-400"></div>
+                        <div>
+                            <span class="font-semibold text-ink">Yellow</span>
+                            <p class="text-slate text-sm">Caution — signal is about to turn red. Stop if safe to do so.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="signal-light bg-red-600"></div>
+                        <div>
+                            <span class="font-semibold text-ink">Red</span>
+                            <p class="text-slate text-sm">Stop — wait until the light turns green and intersection is clear.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-4">Flashing Lights</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="signal-light bg-yellow-400 animate-pulse"></div>
+                        <div>
+                            <span class="font-semibold text-ink">Flashing Yellow</span>
+                            <p class="text-slate text-sm">Slow down and proceed with caution. Yield to cross traffic and pedestrians.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="signal-light bg-red-600 animate-pulse"></div>
+                        <div>
+                            <span class="font-semibold text-ink">Flashing Red</span>
+                            <p class="text-slate text-sm">Same as a stop sign — come to a complete stop, then proceed when safe.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-point rounded-xl p-5 mb-4">
+                <h3 class="font-semibold text-ink mb-2">Turning on Red</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li><strong>Right on red:</strong> Permitted after a complete stop, when safe, unless a "No Turn on Red" sign is posted.</li>
+                    <li><strong>Left on red:</strong> Only when turning from a one-way street onto another one-way street, after stopping.</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Arrow Signals</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li><strong>Green arrow:</strong> You have the right of way to turn in the direction of the arrow.</li>
+                    <li><strong>Yellow arrow:</strong> Your protected turn is ending.</li>
+                    <li><strong>Yellow flashing arrow:</strong> You may turn after yielding to pedestrians and oncoming traffic.</li>
+                    <li><strong>Red arrow:</strong> Do not turn in that direction until the arrow turns green.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Pedestrian Signals -->
+        <section id="pedestrian" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Pedestrian Signals</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-white border-2 border-gray-300 rounded flex items-center justify-center text-green-600 font-bold text-xs">WALK</div>
+                        <div>
+                            <span class="font-semibold text-ink">Walk / Walking Person Symbol</span>
+                            <p class="text-slate text-sm">Pedestrians may safely cross the street.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-white border-2 border-gray-300 rounded flex items-center justify-center text-coral font-bold text-xs leading-tight text-center">DON'T WALK</div>
+                        <div>
+                            <span class="font-semibold text-ink">Don't Walk / Raised Hand Symbol</span>
+                            <p class="text-slate text-sm">Not safe to cross. Flashing means time to cross is ending.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-2">Pedestrian Hybrid Beacon</h3>
+                <p class="text-slate text-sm mb-3">Found at mid-block crosswalks. Dark until activated by a pedestrian.</p>
+                <ol class="text-sm text-slate space-y-1 list-decimal list-inside">
+                    <li>Dark until activated</li>
+                    <li>Flashing yellow — prepare to stop</li>
+                    <li>Steady yellow — stop if safe</li>
+                    <li>Steady red — stop for pedestrians</li>
+                    <li>Flashing red — proceed if crossing is clear</li>
+                    <li>Returns to dark</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Key Rules Summary -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Key Rules to Remember</h2>
+
+            <div class="space-y-3">
+                <div class="key-point rounded-xl p-4">
+                    <p class="text-sm text-ink"><strong>At a stop sign:</strong> Stop at the white line. If none, stop before the crosswalk. If no crosswalk, stop before entering the intersection.</p>
+                </div>
+
+                <div class="key-point rounded-xl p-4">
+                    <p class="text-sm text-ink"><strong>At a yield sign:</strong> Slow down and be prepared to stop. Traffic you're yielding to should not have to brake to avoid you.</p>
+                </div>
+
+                <div class="key-point rounded-xl p-4">
+                    <p class="text-sm text-ink"><strong>Non-working signal:</strong> Treat as a four-way stop. Yield to vehicles already in intersection, vehicles that stopped first, and vehicles to your right.</p>
+                </div>
+
+                <div class="warning-box rounded-xl p-4">
+                    <p class="text-sm text-ink"><strong>Slow-moving vehicle emblem:</strong> Orange fluorescent triangle with red reflective border indicates vehicles that cannot exceed 25 mph.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz CTA -->
+        <section class="card p-6 sm:p-8 text-center mb-8">
+            <h2 class="font-display text-xl font-bold text-ink mb-2">Ready to Test Your Knowledge?</h2>
+            <p class="text-slate text-sm mb-4">Take the 50-question practice quiz covering Chapters 6, 7, and 8.</p>
+            <a href="knowledge_quiz.html" class="cta-btn">Start Practice Quiz</a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-slate text-sm">
+            <p>Based on the Indiana Driver's Manual, Chapter 6</p>
+            <p class="mt-1">Source: <a href="https://www.in.gov/bmv/" class="text-sage hover:underline">Indiana BMV</a></p>
+        </footer>
+    </main>
+
+    <script>
+        // Highlight active nav section on scroll
+        var sections = document.querySelectorAll('section[id]');
+        var navLinks = document.querySelectorAll('.nav-pill');
+
+        function highlightNav() {
+            var scrollPos = window.scrollY + 150;
+
+            sections.forEach(function(section) {
+                var top = section.offsetTop;
+                var bottom = top + section.offsetHeight;
+                var id = section.getAttribute('id');
+
+                if (scrollPos >= top && scrollPos < bottom) {
+                    navLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNav);
+        highlightNav();
+    </script>
+</body>
+</html>
