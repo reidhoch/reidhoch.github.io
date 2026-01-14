@@ -4,70 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indiana Driver Permit Study Guide</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        display: ['Fraunces', 'serif'],
-                        body: ['DM Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: '#1a1a2e',
-                        cream: '#faf9f7',
-                        sage: '#4a7c59',
-                        coral: '#e07a5f',
-                        slate: '#64748b',
-                        asphalt: '#2d3748',
-                        'road-yellow': '#fbbf24',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="shared-styles.css">
     <style>
-        * { font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
-
-        /* Textured background with subtle noise */
-        body {
-            background-color: #faf9f7;
-            background-image:
-                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-        }
-
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow:
-                0 1px 3px rgba(0,0,0,0.06),
-                0 8px 24px rgba(0,0,0,0.04),
-                0 20px 48px rgba(0,0,0,0.02);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #4a7c59, #5a9c6a, #4a7c59);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
+        /* Quiz-specific styles */
 
         /* Road-themed decorative elements */
         .road-line {
@@ -516,7 +457,16 @@
             { q: 'How can you prevent vehicle theft?', o: ['Leave keys in ignition', 'Remove keys and lock doors', 'Hide keys under floor mat', 'Leave windows cracked'], a: 1, ch: 8 },
             { q: 'How should you acknowledge a police stop?', o: ['Flash headlights', 'Turn on right turn signal', 'Honk horn', 'Wave at officer'], a: 1, ch: 8 },
             { q: 'How should you use ABS brakes when skidding?', o: ['Pump the brakes rapidly', 'Apply firm continuous pressure and steer normally', 'Release brakes completely', 'Press and release quickly'], a: 1, ch: 8 },
-            { q: 'What affects blood alcohol concentration?', o: ['Time of day', 'Amount consumed, speed, and body weight', 'Vehicle type', 'Road conditions'], a: 1, ch: 8 }
+            { q: 'What affects blood alcohol concentration?', o: ['Time of day', 'Amount consumed, speed, and body weight', 'Vehicle type', 'Road conditions'], a: 1, ch: 8 },
+            { q: 'What must your insurance provider file after an accident upon BMV request?', o: ['Accident report', 'Certificate of Compliance (COC)', 'Police report', 'Medical records'], a: 1, ch: 8 },
+            { q: 'Where should you NOT stop during a police traffic stop?', o: ['Right shoulder', 'Center median', 'Well-lit parking lot', 'Side street'], a: 1, ch: 8 },
+            { q: 'What does signing a traffic ticket mean?', o: ['Admission of guilt', 'Agreement to pay the fine', 'Acknowledgment of receiving the ticket', 'Waiving your right to court'], a: 2, ch: 8 },
+            { q: 'What can happen if you refuse breath, blood, or performance tests?', o: ['Nothing', 'Loss of driving privileges', 'A warning only', 'Reduced fine'], a: 1, ch: 8 },
+            { q: 'How should you park your front wheels to prevent theft?', o: ['Straight ahead', 'Sharply to the right', 'Sharply to the left', 'Wheels position does not matter'], a: 1, ch: 8 },
+            { q: 'When should you roll down tinted windows during a police stop?', o: ['When asked by officer', 'After stopping and before officer approaches', 'Never', 'Only the driver window'], a: 1, ch: 8 },
+            { q: 'How does alcohol affect your driving ability?', o: ['Improves reaction time', 'Impairs thinking, coordination, and reaction time', 'Only affects vision', 'Has no effect below legal limit'], a: 1, ch: 8 },
+            { q: 'What items should you keep in your vehicle during winter months?', o: ['Extra fuel only', 'Blankets, gloves, and warm hats', 'Food and water only', 'Road flares only'], a: 1, ch: 8 },
+            { q: 'How far behind your vehicle should you place warning triangles on a hill or curve?', o: ['100 feet', '200 feet', '500 feet', '1000 feet'], a: 2, ch: 8 }
         ];
 
         var state = {

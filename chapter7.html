@@ -4,104 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 7: Safe Vehicle Operation | Indiana Permit Study Guide</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        display: ['Fraunces', 'serif'],
-                        body: ['DM Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: '#1a1a2e',
-                        cream: '#faf9f7',
-                        sage: '#4a7c59',
-                        coral: '#e07a5f',
-                        slate: '#64748b',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="shared-styles.css">
     <style>
-        * { font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
-
-        /* Textured background */
-        body {
-            background-color: #faf9f7;
-            background-image:
-                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-        }
-
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow:
-                0 1px 3px rgba(0,0,0,0.06),
-                0 8px 24px rgba(0,0,0,0.04),
-                0 20px 48px rgba(0,0,0,0.02);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow:
-                0 1px 3px rgba(0,0,0,0.08),
-                0 12px 32px rgba(0,0,0,0.06),
-                0 24px 56px rgba(0,0,0,0.04);
-        }
-
-        .section-nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(250, 249, 247, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .nav-pill {
-            padding: 0.5rem 0.75rem;
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: all 0.2s;
-            color: #64748b;
-        }
-        .nav-pill:hover { background: white; color: #1a1a2e; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .nav-pill.active { background: linear-gradient(135deg, #4a7c59, #5a9c6a); color: white; box-shadow: 0 2px 8px rgba(74,124,89,0.3); }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-in { animation: fadeIn 0.4s ease-out; }
-
-        html { scroll-behavior: smooth; }
-
-        .key-point {
-            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-            border-left: 4px solid #4a7c59;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, #fef3c7, #fef9c3);
-            border-left: 4px solid #f59e0b;
-        }
-
-        .danger-box {
-            background: linear-gradient(135deg, #fee2e2, #fecaca);
-            border-left: 4px solid #ef4444;
-        }
-
+        /* Chapter 7 specific styles */
         .speed-badge {
             display: inline-flex;
             align-items: center;
@@ -119,51 +26,6 @@
         .lane-yellow { background: #facc15; height: 4px; }
         .lane-white { background: white; border: 1px solid #cbd5e1; height: 4px; }
         .lane-dashed { background: repeating-linear-gradient(90deg, currentColor 0, currentColor 12px, transparent 12px, transparent 20px); height: 4px; }
-
-        /* Road sign header badge */
-        .chapter-sign {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #fef3c7;
-            border: 3px solid #1a1a2e;
-            border-radius: 0.25rem;
-            padding: 0.5rem 1rem;
-            font-weight: 700;
-            font-size: 0.875rem;
-            color: #1a1a2e;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
-        }
-
-        /* Quiz CTA button */
-        .cta-btn {
-            background: linear-gradient(135deg, #4a7c59 0%, #3d6649 100%);
-            color: white;
-            font-weight: 600;
-            padding: 0.875rem 1.5rem;
-            border-radius: 0.75rem;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
-            display: inline-block;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        .cta-btn:hover::before { left: 100%; }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
-        }
     </style>
 </head>
 <body class="bg-cream min-h-screen">
@@ -171,7 +33,7 @@
     <nav class="section-nav border-b border-gray-200">
         <div class="max-w-4xl mx-auto px-4 py-3">
             <div class="flex items-center justify-between gap-4">
-                <a href="knowledge_quiz.html" class="text-sage font-semibold text-sm hover:underline">← Back to Quiz</a>
+                <a href="knowledge_quiz.html" class="text-sage font-semibold text-sm hover:underline">&larr; Back to Quiz</a>
                 <span class="text-slate text-sm hidden sm:block">Chapter 7 Study Guide</span>
             </div>
         </div>
@@ -305,7 +167,7 @@
                     </div>
                     <div class="text-center">
                         <div class="speed-badge mx-auto mb-2">55</div>
-                        <p class="text-xs text-slate">Urban Interstate<br>& County Roads</p>
+                        <p class="text-xs text-slate">Urban Interstate<br>&amp; County Roads</p>
                     </div>
                     <div class="text-center">
                         <div class="speed-badge mx-auto mb-2">30</div>
@@ -340,7 +202,7 @@
 
         <!-- Following Distance & Braking -->
         <section class="mb-8">
-            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Following Distance & Braking</h2>
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Following Distance &amp; Braking</h2>
 
             <div class="key-point rounded-xl p-5 mb-4">
                 <h3 class="font-semibold text-ink mb-2">2-3 Second Rule</h3>
@@ -455,7 +317,7 @@
 
         <!-- Impaired & Distracted Driving -->
         <section id="safety" class="mb-8 scroll-mt-28">
-            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Impaired & Distracted Driving</h2>
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Impaired &amp; Distracted Driving</h2>
 
             <div class="card p-5 sm:p-6 mb-4">
                 <h3 class="font-semibold text-ink mb-3">Drowsy Driving</h3>
@@ -580,7 +442,7 @@
 
         <!-- Roundabouts & Intersections -->
         <section class="mb-8">
-            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Roundabouts & Intersections</h2>
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Roundabouts &amp; Intersections</h2>
 
             <div class="card p-5 sm:p-6 mb-4">
                 <h3 class="font-semibold text-ink mb-3">Roundabouts</h3>
@@ -638,7 +500,7 @@
 
         <!-- Seat Belts -->
         <section class="mb-8">
-            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Seat Belts & Child Restraints</h2>
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Seat Belts &amp; Child Restraints</h2>
 
             <div class="key-point rounded-xl p-5 mb-4">
                 <h3 class="font-semibold text-ink mb-2">Indiana Law</h3>
@@ -687,29 +549,6 @@
         </footer>
     </main>
 
-    <script>
-        var sections = document.querySelectorAll('section[id]');
-        var navLinks = document.querySelectorAll('.nav-pill');
-
-        function highlightNav() {
-            var scrollPos = window.scrollY + 150;
-            sections.forEach(function(section) {
-                var top = section.offsetTop;
-                var bottom = top + section.offsetHeight;
-                var id = section.getAttribute('id');
-                if (scrollPos >= top && scrollPos < bottom) {
-                    navLinks.forEach(function(link) {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }
-
-        window.addEventListener('scroll', highlightNav);
-        highlightNav();
-    </script>
+    <script src="shared-nav.js"></script>
 </body>
 </html>
