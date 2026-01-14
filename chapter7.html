@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Safe Vehicle Operation | Indiana Permit Study Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        ink: '#1a1a2e',
+                        cream: '#faf9f7',
+                        sage: '#4a7c59',
+                        coral: '#e07a5f',
+                        slate: '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
+
+        /* Textured background */
+        body {
+            background-color: #faf9f7;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.06),
+                0 8px 24px rgba(0,0,0,0.04),
+                0 20px 48px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.08),
+                0 12px 32px rgba(0,0,0,0.06),
+                0 24px 56px rgba(0,0,0,0.04);
+        }
+
+        .section-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(250, 249, 247, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .nav-pill {
+            padding: 0.5rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+            color: #64748b;
+        }
+        .nav-pill:hover { background: white; color: #1a1a2e; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .nav-pill.active { background: linear-gradient(135deg, #4a7c59, #5a9c6a); color: white; box-shadow: 0 2px 8px rgba(74,124,89,0.3); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeIn 0.4s ease-out; }
+
+        html { scroll-behavior: smooth; }
+
+        .key-point {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border-left: 4px solid #4a7c59;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7, #fef9c3);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-left: 4px solid #ef4444;
+        }
+
+        .speed-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            border: 3px solid #1a1a2e;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .lane-yellow { background: #facc15; height: 4px; }
+        .lane-white { background: white; border: 1px solid #cbd5e1; height: 4px; }
+        .lane-dashed { background: repeating-linear-gradient(90deg, currentColor 0, currentColor 12px, transparent 12px, transparent 20px); height: 4px; }
+
+        /* Road sign header badge */
+        .chapter-sign {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fef3c7;
+            border: 3px solid #1a1a2e;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #1a1a2e;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Quiz CTA button */
+        .cta-btn {
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6649 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .cta-btn:hover::before { left: 100%; }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-cream min-h-screen">
+    <!-- Navigation -->
+    <nav class="section-nav border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between gap-4">
+                <a href="knowledge_quiz.html" class="text-sage font-semibold text-sm hover:underline">← Back to Quiz</a>
+                <span class="text-slate text-sm hidden sm:block">Chapter 7 Study Guide</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Navigation -->
+    <div class="section-nav border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-2">
+            <div class="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-hide">
+                <a href="#lanes" class="nav-pill">Lanes</a>
+                <a href="#speed" class="nav-pill">Speed</a>
+                <a href="#weather" class="nav-pill">Weather</a>
+                <a href="#safety" class="nav-pill">Safety</a>
+                <a href="#sharing" class="nav-pill">Sharing</a>
+                <a href="#parking" class="nav-pill">Parking</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-4 py-6 sm:py-10">
+        <!-- Header -->
+        <header class="text-center mb-8 animate-in">
+            <div class="inline-block mb-4">
+                <span class="chapter-sign">
+                    <span>CH</span>
+                    <span class="text-lg">7</span>
+                </span>
+            </div>
+            <h1 class="font-display text-2xl sm:text-4xl font-bold text-ink leading-tight mb-2">Safe Vehicle Operation</h1>
+            <p class="text-slate">Chapter 7 — Indiana Driver's Manual</p>
+        </header>
+
+        <!-- Introduction -->
+        <section class="card p-5 sm:p-6 mb-6 animate-in">
+            <p class="text-ink leading-relaxed">
+                A defensive driver looks out for the actions of other drivers and anticipates potential problems. This chapter covers lane markings, speed limits, passing rules, and how to safely share the road.
+            </p>
+        </section>
+
+        <!-- Lane Markings -->
+        <section id="lanes" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Lane Markings</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3 flex items-center gap-2">
+                    <span class="w-8 h-2 bg-yellow-400 rounded"></span> Yellow Lines
+                </h3>
+                <p class="text-slate text-sm mb-3">Separate traffic going in <strong>opposite directions</strong>.</p>
+                <ul class="text-sm text-slate space-y-2">
+                    <li><strong>Broken yellow:</strong> You may cross to pass when safe.</li>
+                    <li><strong>Solid yellow on your side:</strong> Do not cross except to turn.</li>
+                    <li><strong>Double solid yellow:</strong> Neither direction may pass.</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3 flex items-center gap-2">
+                    <span class="w-8 h-2 bg-white border border-gray-300 rounded"></span> White Lines
+                </h3>
+                <p class="text-slate text-sm mb-3">Separate traffic going in the <strong>same direction</strong>.</p>
+                <ul class="text-sm text-slate space-y-2">
+                    <li><strong>Broken white:</strong> You may change lanes when safe.</li>
+                    <li><strong>Solid white:</strong> Do not cross — stay in your lane.</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Changing Lanes</h3>
+                <ol class="text-sm text-slate space-y-2 list-decimal list-inside">
+                    <li>Check that the lane ahead is clear</li>
+                    <li>Check mirrors for vehicles preparing to pass</li>
+                    <li>Turn head briefly to check blind spot</li>
+                    <li>Signal your intention</li>
+                    <li>Move smoothly into the new lane</li>
+                </ol>
+                <div class="key-point rounded-lg p-3 mt-4">
+                    <p class="text-sm text-ink"><strong>Important:</strong> Change only one lane at a time. Do not weave in and out of traffic.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Passing -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Passing Other Vehicles</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">How to Pass Safely</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li>• Make sure passing lane is clear — return to your lane at least <strong>100 feet</strong> before any oncoming vehicle</li>
+                    <li>• Check behind and to the left for vehicles passing you</li>
+                    <li>• Signal, move into passing lane, accelerate</li>
+                    <li>• Continue until you see the passed vehicle in your rearview mirror</li>
+                    <li>• Signal and return to your lane</li>
+                </ul>
+            </div>
+
+            <div class="danger-box rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-ink mb-2">Passing is Prohibited</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Solid yellow line on your side</li>
+                    <li>• "No Passing Zone" pennant posted</li>
+                    <li>• On or approaching a curve</li>
+                    <li>• Approaching a hill crest</li>
+                    <li>• Within <strong>100 feet</strong> of intersections, railroad crossings, bridges, or tunnels</li>
+                </ul>
+            </div>
+
+            <div class="key-point rounded-xl p-4">
+                <p class="text-sm text-ink"><strong>Being Passed:</strong> Allow the other vehicle to pass safely. Do not increase your speed.</p>
+            </div>
+        </section>
+
+        <!-- Speed Limits -->
+        <section id="speed" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Speed Limits</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-4">Indiana Speed Limits</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="text-center">
+                        <div class="speed-badge mx-auto mb-2">70</div>
+                        <p class="text-xs text-slate">Rural Interstate<br>(passenger vehicles)</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="speed-badge mx-auto mb-2">65</div>
+                        <p class="text-xs text-slate">Rural Interstate<br>(trucks &gt;26,000 lbs)</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="speed-badge mx-auto mb-2">60</div>
+                        <p class="text-xs text-slate">Rural State<br>Divided Highway</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="speed-badge mx-auto mb-2">55</div>
+                        <p class="text-xs text-slate">Urban Interstate<br>& County Roads</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="speed-badge mx-auto mb-2">30</div>
+                        <p class="text-xs text-slate">Urban<br>Residential</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="speed-badge mx-auto mb-2">15</div>
+                        <p class="text-xs text-slate">Alleys</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">School Zones</h3>
+                    <p class="text-sm text-slate">Slow to posted limit. Common hours: 7 AM – 4:30 PM on school days, or when beacons are flashing.</p>
+                </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Work Zones</h3>
+                    <p class="text-sm text-slate">Always at least <strong>10 mph below</strong> the maximum speed limit for the area.</p>
+                </div>
+            </div>
+
+            <div class="card p-4">
+                <h3 class="font-semibold text-ink mb-2">School Bus Speed Limits</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Non-interstate/highway: <strong>40 mph</strong> max (or posted limit if lower)</li>
+                    <li>• Interstate/highway: <strong>60 mph</strong> max (or posted limit)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Following Distance & Braking -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Following Distance & Braking</h2>
+
+            <div class="key-point rounded-xl p-5 mb-4">
+                <h3 class="font-semibold text-ink mb-2">2-3 Second Rule</h3>
+                <p class="text-sm text-slate">Stay at least 2-3 seconds behind the vehicle ahead. Watch for it to pass a fixed object, then count the time until you pass the same object.</p>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Stopping Distance by Speed</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-2 text-slate font-medium">Speed</th>
+                                <th class="text-left py-2 text-slate font-medium">Feet/Second</th>
+                                <th class="text-left py-2 text-slate font-medium">Football Field</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-ink">
+                            <tr class="border-b border-gray-100">
+                                <td class="py-2">35 mph</td>
+                                <td class="py-2">51 ft/sec</td>
+                                <td class="py-2">5.8 seconds</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-2">55 mph</td>
+                                <td class="py-2">81 ft/sec</td>
+                                <td class="py-2">3.7 seconds</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">70 mph</td>
+                                <td class="py-2">103 ft/sec</td>
+                                <td class="py-2">2.9 seconds</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Skid Recovery</h3>
+                <div class="space-y-3">
+                    <div class="bg-cream rounded-lg p-3">
+                        <p class="font-medium text-ink text-sm">Standard Brakes:</p>
+                        <p class="text-sm text-slate">Ease off gas. Steer in the direction the rear is sliding. When you regain traction, straighten and proceed slowly.</p>
+                    </div>
+                    <div class="bg-cream rounded-lg p-3">
+                        <p class="font-medium text-ink text-sm">ABS Brakes:</p>
+                        <p class="text-sm text-slate">Keep foot on brake with firm, continuous pressure. Steer normally. <strong>Do not pump the brakes.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weather Conditions -->
+        <section id="weather" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Driving in Weather Conditions</h2>
+
+            <div class="space-y-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Rain</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• Roads are most slippery at the <strong>start of rainfall</strong></li>
+                        <li>• <strong>Hydroplaning</strong> occurs when tires lose contact with the road due to water</li>
+                        <li>• Slow down, avoid bald tires, test brakes after puddles</li>
+                    </ul>
+                </div>
+
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Fog</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• Use <strong>low beam headlights</strong> (not high beams)</li>
+                        <li>• Reduce speed, use emergency flashers</li>
+                        <li>• If visibility is near zero, pull off road and stop</li>
+                    </ul>
+                </div>
+
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2">Winter / Ice</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• Clear all windows before driving</li>
+                        <li>• Watch for ice on bridges and overpasses (freezes first)</li>
+                        <li>• Stay behind snowplows at safe distance</li>
+                        <li>• Keep gas tank full in case stranded</li>
+                    </ul>
+                </div>
+
+                <div class="danger-box rounded-xl p-4">
+                    <h3 class="font-semibold text-ink mb-2">Flash Flooding</h3>
+                    <ul class="text-sm text-slate space-y-1">
+                        <li>• <strong>Do not drive</strong> around barricades or through flooded roads</li>
+                        <li>• Water depth can be deceiving and may hide washouts</li>
+                        <li>• If car stalls in flood water, abandon it immediately</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Night Driving -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Driving at Night</h2>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Headlight Rules</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li>• Use headlights <strong>sunset to sunrise</strong> and when visibility is less than <strong>500 feet</strong></li>
+                    <li>• Use <strong>low beams</strong> within 500 feet of oncoming traffic</li>
+                    <li>• Use <strong>low beams</strong> when following within 200 feet of another vehicle</li>
+                    <li>• To avoid glare, look at the right side of the road, not at oncoming lights</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Impaired & Distracted Driving -->
+        <section id="safety" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Impaired & Distracted Driving</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Drowsy Driving</h3>
+                <p class="text-sm text-slate mb-3">Going 18 hours without sleep impairs you as much as a 0.08 BAC (the legal limit).</p>
+                <p class="font-medium text-ink text-sm mb-2">Warning signs:</p>
+                <div class="grid grid-cols-2 gap-2 text-sm text-slate">
+                    <div>• Yawning, heavy eyelids</div>
+                    <div>• Head nodding</div>
+                    <div>• Missing exits/signs</div>
+                    <div>• Hitting rumble strips</div>
+                    <div>• Can't remember last few miles</div>
+                    <div>• Changing lanes unexpectedly</div>
+                </div>
+            </div>
+
+            <div class="danger-box rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-ink mb-2">Distracted Driving — Indiana Law</h3>
+                <p class="text-sm text-slate">It is <strong>illegal</strong> to use a cell phone while driving unless it is <strong>hands-free</strong>. Texting while driving is illegal.</p>
+                <p class="text-sm text-slate mt-2">Texting at 55 mph = driving the length of a football field with your eyes closed.</p>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Aggressive Driving</h3>
+                <p class="text-sm text-slate mb-3">Defined as committing <strong>3 or more</strong> of the following in one episode:</p>
+                <div class="grid grid-cols-2 gap-2 text-sm text-slate">
+                    <div>• Following too closely</div>
+                    <div>• Unsafe operation</div>
+                    <div>• Passing on right off-road</div>
+                    <div>• Unsafe stopping/slowing</div>
+                    <div>• Unnecessary horn use</div>
+                    <div>• Failure to yield</div>
+                    <div>• Failure to obey signals</div>
+                    <div>• Unsafe speed</div>
+                    <div>• Repeatedly flashing lights</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sharing the Road -->
+        <section id="sharing" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Sharing the Road</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Move Over Law</h3>
+                <p class="text-sm text-slate mb-3">When approaching stopped emergency or service vehicles with flashing lights:</p>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• <strong>Change lanes away</strong> from the vehicle if possible</li>
+                    <li>• If you cannot move over, <strong>slow to 10 mph under</strong> the posted limit</li>
+                </ul>
+                <p class="text-sm text-slate mt-3">Applies to: emergency vehicles, tow trucks, highway maintenance, utility vehicles, trash trucks, and disabled vehicles with hazards on.</p>
+            </div>
+
+            <div class="danger-box rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-ink mb-2">School Buses</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• <strong>Stop</strong> when red lights flash and stop arm is extended</li>
+                    <li>• On divided highway: stop only if traveling in same direction</li>
+                    <li>• Watch for children who may dart into the street</li>
+                    <li>• School buses stop at railroad crossings — don't rear-end them!</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Tractor-Trailers</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li><strong>Stopping distance:</strong> 4x longer than cars (400+ feet at 55 mph vs ~130 feet for cars)</li>
+                    <li><strong>Blind spots:</strong> 20 feet in front, alongside cab, either side of trailer, up to 200 feet behind</li>
+                    <li><strong>Turning:</strong> Trucks swing wide — don't pass on the right when they're turning</li>
+                </ul>
+                <div class="key-point rounded-lg p-3 mt-3">
+                    <p class="text-sm text-ink">If you can't see their mirrors, they can't see you.</p>
+                </div>
+            </div>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Bicycles</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Pass with at least <strong>3 feet</strong> of space</li>
+                    <li>• Bicyclists have the same rights as motor vehicles</li>
+                    <li>• Bicyclists may use travel lane or bike lane</li>
+                    <li>• Check for bicyclists before opening car doors</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Motorcycles</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Allow full lane width — don't share lanes</li>
+                    <li>• Harder to judge speed and distance due to small size</li>
+                    <li>• Turn signals are not self-canceling — wait to confirm turn</li>
+                    <li>• Allow 3-4 seconds following distance</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Railroad Crossings -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Railroad Crossings</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Vehicles Required to Stop</h3>
+                <p class="text-sm text-slate mb-2">Must stop between <strong>15-50 feet</strong> from the nearest rail:</p>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• All vehicles carrying passengers for hire</li>
+                    <li>• All school buses</li>
+                    <li>• Vehicles carrying explosives or flammable liquids</li>
+                </ul>
+            </div>
+
+            <div class="danger-box rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Railroad Safety Rules</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• <strong>Never</strong> drive around a lowered gate</li>
+                    <li>• Never race a train — their speed is deceiving</li>
+                    <li>• Don't stop or shift gears on the tracks</li>
+                    <li>• If stalled on tracks: evacuate immediately, run at 45° angle toward the train</li>
+                    <li>• Do not pass within 100 feet of a crossing</li>
+                    <li>• Watch for second trains on multiple tracks</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Roundabouts & Intersections -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Roundabouts & Intersections</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Roundabouts</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li>• <strong>Incoming traffic yields</strong> to circulating traffic</li>
+                    <li>• Traffic moves counterclockwise</li>
+                    <li>• Know your lane before entering — don't change lanes inside</li>
+                    <li>• Yield to large vehicles (trucks, buses) that may need multiple lanes</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">All-Way Stops</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• First to stop = first to go</li>
+                    <li>• If arriving at the same time, vehicle on the <strong>left yields to vehicle on the right</strong></li>
+                    <li>• When in doubt, yield to avoid a crash</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Parking -->
+        <section id="parking" class="mb-8 scroll-mt-28">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Parking</h2>
+
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Wheel Position on Hills</h3>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="bg-cream rounded-lg p-3">
+                        <p class="font-medium text-ink text-sm">Downhill (with curb):</p>
+                        <p class="text-sm text-slate">Turn wheels <strong>toward</strong> the curb</p>
+                    </div>
+                    <div class="bg-cream rounded-lg p-3">
+                        <p class="font-medium text-ink text-sm">Uphill (with curb):</p>
+                        <p class="text-sm text-slate">Turn wheels <strong>away</strong> from curb</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate mt-3">No curb? Turn wheels away from the street.</p>
+            </div>
+
+            <div class="danger-box rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Illegal Parking</h3>
+                <div class="grid grid-cols-2 gap-2 text-sm text-slate">
+                    <div>• Within 15 feet of fire hydrant</div>
+                    <div>• On sidewalks</div>
+                    <div>• In front of driveways</div>
+                    <div>• Within intersections</div>
+                    <div>• On bridges/tunnels</div>
+                    <div>• Beside yellow curbs</div>
+                    <div>• In crosswalks</div>
+                    <div>• Beside another parked car</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seat Belts -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Seat Belts & Child Restraints</h2>
+
+            <div class="key-point rounded-xl p-5 mb-4">
+                <h3 class="font-semibold text-ink mb-2">Indiana Law</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• <strong>All drivers and passengers</strong> must wear seat belts</li>
+                    <li>• Children under 8 must be in a <strong>child restraint system</strong></li>
+                    <li>• Children under 12 should ride in the back seat (air bag danger)</li>
+                </ul>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Seat Belt Tips</h3>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Wear belt low on hips and flat across collar bone</li>
+                    <li>• Driver should sit at least 12 inches from steering wheel</li>
+                    <li>• Seat belts increase survival chance by 45%</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Pedestrian Safety -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Pedestrian Safety</h2>
+
+            <div class="card p-5 sm:p-6">
+                <ul class="text-sm text-slate space-y-2">
+                    <li>• <strong>Always yield</strong> to pedestrians</li>
+                    <li>• Don't make a turn that causes a pedestrian to stop or take evasive action</li>
+                    <li>• Take special care around children — they may cross unexpectedly</li>
+                    <li>• Always yield to visually impaired pedestrians (white cane or guide dog)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Quiz CTA -->
+        <section class="card p-6 sm:p-8 text-center mb-8">
+            <h2 class="font-display text-xl font-bold text-ink mb-2">Ready to Test Your Knowledge?</h2>
+            <p class="text-slate text-sm mb-4">Take the 50-question practice quiz covering Chapters 6, 7, and 8.</p>
+            <a href="knowledge_quiz.html" class="cta-btn">Start Practice Quiz</a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-slate text-sm">
+            <p>Based on the Indiana Driver's Manual, Chapter 7</p>
+            <p class="mt-1">Source: <a href="https://www.in.gov/bmv/" class="text-sage hover:underline">Indiana BMV</a></p>
+        </footer>
+    </main>
+
+    <script>
+        var sections = document.querySelectorAll('section[id]');
+        var navLinks = document.querySelectorAll('.nav-pill');
+
+        function highlightNav() {
+            var scrollPos = window.scrollY + 150;
+            sections.forEach(function(section) {
+                var top = section.offsetTop;
+                var bottom = top + section.offsetHeight;
+                var id = section.getAttribute('id');
+                if (scrollPos >= top && scrollPos < bottom) {
+                    navLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNav);
+        highlightNav();
+    </script>
+</body>
+</html>

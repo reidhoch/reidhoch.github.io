@@ -1,2 +1,294 @@
-Hello, World!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indiana Driver Permit Study Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        ink: '#1a1a2e',
+                        cream: '#faf9f7',
+                        sage: '#4a7c59',
+                        coral: '#e07a5f',
+                        slate: '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
 
+        body {
+            background-color: #faf9f7;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.06),
+                0 8px 24px rgba(0,0,0,0.04),
+                0 20px 48px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.08),
+                0 12px 32px rgba(0,0,0,0.06),
+                0 24px 56px rgba(0,0,0,0.04);
+        }
+
+        .road-sign {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fef3c7;
+            border: 3px solid #1a1a2e;
+            border-radius: 0.25rem;
+            padding: 0.625rem 1.25rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a1a2e;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .road-line {
+            position: absolute;
+            width: 4px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #fbbf24 0px,
+                #fbbf24 20px,
+                transparent 20px,
+                transparent 40px
+            );
+            opacity: 0.3;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6649 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .cta-btn:hover::before { left: 100%; }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
+        }
+
+        .study-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .study-link:hover {
+            border-color: #4a7c59;
+            transform: translateX(4px);
+            box-shadow: -4px 0 0 #4a7c59;
+        }
+
+        .study-link-icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #1a1a2e;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in { animation: fadeIn 0.4s ease-out forwards; }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+        .feature-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="road-line hidden sm:block" style="left: 10%; top: 0; bottom: 0;"></div>
+    <div class="road-line hidden sm:block" style="right: 10%; top: 0; bottom: 0;"></div>
+
+    <div class="max-w-2xl mx-auto px-4 py-8 sm:py-16 relative">
+        <!-- Hero Section -->
+        <header class="text-center mb-10 animate-in">
+            <div class="inline-block mb-4">
+                <span class="road-sign">
+                    <span>IN</span>
+                    <span class="text-xl">PERMIT</span>
+                </span>
+            </div>
+            <h1 class="font-display text-3xl sm:text-4xl font-bold text-ink leading-tight mb-3">Indiana Driver<br>Permit Study Guide</h1>
+            <p class="text-slate text-base sm:text-lg">Master Chapters 6, 7 &amp; 8 of the Indiana Driver's Manual</p>
+        </header>
+
+        <!-- Main CTA -->
+        <section class="card p-6 sm:p-8 text-center mb-8 animate-in delay-1">
+            <div class="mb-4">
+                <span class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-sage/10 to-sage/20 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </span>
+            </div>
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-2">Practice Quiz</h2>
+            <p class="text-slate mb-6">50 randomized questions from all chapters.<br>Score 80% or higher to pass.</p>
+            <a href="knowledge_quiz.html" class="cta-btn text-lg">Start Quiz</a>
+        </section>
+
+        <!-- Study Guides -->
+        <section class="mb-8 animate-in delay-2">
+            <h2 class="font-display text-lg font-bold text-ink mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+                Study Guides
+            </h2>
+            <div class="space-y-3">
+                <a href="chapter6.html" class="study-link">
+                    <span class="study-link-icon">CH 6</span>
+                    <div>
+                        <p class="font-semibold text-ink">Traffic Signs &amp; Signals</p>
+                        <p class="text-slate text-sm">Colors, shapes, traffic lights, and pedestrian signals</p>
+                    </div>
+                </a>
+                <a href="chapter7.html" class="study-link">
+                    <span class="study-link-icon">CH 7</span>
+                    <div>
+                        <p class="font-semibold text-ink">Safe Vehicle Operation</p>
+                        <p class="text-slate text-sm">Lane markings, speed limits, weather, and sharing the road</p>
+                    </div>
+                </a>
+                <a href="chapter8.html" class="study-link">
+                    <span class="study-link-icon">CH 8</span>
+                    <div>
+                        <p class="font-semibold text-ink">Accidents &amp; Emergencies</p>
+                        <p class="text-slate text-sm">Collision procedures, equipment failures, and traffic stops</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="card p-6 mb-8 animate-in delay-3">
+            <h2 class="font-display text-lg font-bold text-ink mb-4">What's Included</h2>
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="flex items-start gap-3">
+                    <div class="feature-icon">
+                        <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-ink text-sm">71 Practice Questions</p>
+                        <p class="text-slate text-xs">Covering all key topics</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="feature-icon">
+                        <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-ink text-sm">Randomized Order</p>
+                        <p class="text-slate text-xs">Different quiz every time</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="feature-icon">
+                        <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-ink text-sm">Score Tracking</p>
+                        <p class="text-slate text-xs">By chapter breakdown</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="feature-icon">
+                        <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-ink text-sm">Mobile Friendly</p>
+                        <p class="text-slate text-xs">Study anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-slate text-sm animate-in delay-4">
+            <p>Based on the official Indiana Driver's Manual</p>
+            <p class="mt-1">Source: <a href="https://www.in.gov/bmv/" class="text-sage hover:underline">Indiana BMV</a></p>
+        </footer>
+    </div>
+</body>
+</html>
