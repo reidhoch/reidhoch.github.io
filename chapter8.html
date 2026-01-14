@@ -4,109 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 8: Accidents & Emergencies | Indiana Permit Study Guide</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        display: ['Fraunces', 'serif'],
-                        body: ['DM Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: '#1a1a2e',
-                        cream: '#faf9f7',
-                        sage: '#4a7c59',
-                        coral: '#e07a5f',
-                        slate: '#64748b',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="shared-styles.css">
     <style>
-        * { font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, .font-display { font-family: 'Fraunces', serif; }
-
-        /* Textured background */
-        body {
-            background-color: #faf9f7;
-            background-image:
-                radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-        }
-
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow:
-                0 1px 3px rgba(0,0,0,0.06),
-                0 8px 24px rgba(0,0,0,0.04),
-                0 20px 48px rgba(0,0,0,0.02);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow:
-                0 1px 3px rgba(0,0,0,0.08),
-                0 12px 32px rgba(0,0,0,0.06),
-                0 24px 56px rgba(0,0,0,0.04);
-        }
-
-        .section-nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(250, 249, 247, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .nav-pill {
-            padding: 0.5rem 0.75rem;
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: all 0.2s;
-            color: #64748b;
-        }
-        .nav-pill:hover { background: white; color: #1a1a2e; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .nav-pill.active { background: linear-gradient(135deg, #4a7c59, #5a9c6a); color: white; box-shadow: 0 2px 8px rgba(74,124,89,0.3); }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-in { animation: fadeIn 0.4s ease-out; }
-
-        html { scroll-behavior: smooth; }
-
-        .key-point {
-            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-            border-left: 4px solid #4a7c59;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, #fef3c7, #fef9c3);
-            border-left: 4px solid #f59e0b;
-        }
-
-        .danger-box {
-            background: linear-gradient(135deg, #fee2e2, #fecaca);
-            border-left: 4px solid #ef4444;
-        }
-
-        .emergency-box {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            border-left: 4px solid #3b82f6;
-        }
-
+        /* Chapter 8 specific styles */
         .step-number {
             width: 1.75rem;
             height: 1.75rem;
@@ -121,51 +23,6 @@
             flex-shrink: 0;
             box-shadow: 0 2px 4px rgba(74,124,89,0.3);
         }
-
-        /* Road sign header badge */
-        .chapter-sign {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #fef3c7;
-            border: 3px solid #1a1a2e;
-            border-radius: 0.25rem;
-            padding: 0.5rem 1rem;
-            font-weight: 700;
-            font-size: 0.875rem;
-            color: #1a1a2e;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
-        }
-
-        /* Quiz CTA button */
-        .cta-btn {
-            background: linear-gradient(135deg, #4a7c59 0%, #3d6649 100%);
-            color: white;
-            font-weight: 600;
-            padding: 0.875rem 1.5rem;
-            border-radius: 0.75rem;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
-            display: inline-block;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        .cta-btn:hover::before { left: 100%; }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
-        }
     </style>
 </head>
 <body class="bg-cream min-h-screen">
@@ -173,7 +30,7 @@
     <nav class="section-nav border-b border-gray-200">
         <div class="max-w-4xl mx-auto px-4 py-3">
             <div class="flex items-center justify-between gap-4">
-                <a href="knowledge_quiz.html" class="text-sage font-semibold text-sm hover:underline">← Back to Quiz</a>
+                <a href="knowledge_quiz.html" class="text-sage font-semibold text-sm hover:underline">&larr; Back to Quiz</a>
                 <span class="text-slate text-sm hidden sm:block">Chapter 8 Study Guide</span>
             </div>
         </div>
@@ -248,6 +105,13 @@
                             <p class="text-sm text-slate">Notify police, sheriff, or state police as soon as possible.</p>
                         </div>
                     </div>
+                    <div class="flex gap-3">
+                        <div class="step-number">5</div>
+                        <div>
+                            <p class="font-medium text-ink text-sm">Provide Proof of Financial Responsibility</p>
+                            <p class="text-sm text-slate">Upon BMV request, your insurance provider must file a <strong>Certificate of Compliance (COC)</strong> electronically to prove you had valid insurance at the time of the accident.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -280,17 +144,17 @@
                 <h3 class="font-semibold text-ink mb-3">Three Options to Avoid a Collision</h3>
                 <div class="grid sm:grid-cols-3 gap-4">
                     <div class="bg-cream rounded-lg p-4 text-center">
-                        <div class="text-2xl mb-2">🛑</div>
+                        <div class="text-2xl mb-2">&#x1F6D1;</div>
                         <p class="font-semibold text-ink text-sm">Stop Quickly</p>
                         <p class="text-xs text-slate mt-1">If you have enough distance</p>
                     </div>
                     <div class="bg-cream rounded-lg p-4 text-center">
-                        <div class="text-2xl mb-2">↩️</div>
+                        <div class="text-2xl mb-2">&#x21A9;&#xFE0F;</div>
                         <p class="font-semibold text-ink text-sm">Turn Quickly</p>
                         <p class="text-xs text-slate mt-1">If you can't stop in time</p>
                     </div>
                     <div class="bg-cream rounded-lg p-4 text-center">
-                        <div class="text-2xl mb-2">⏩</div>
+                        <div class="text-2xl mb-2">&#x23E9;</div>
                         <p class="font-semibold text-ink text-sm">Speed Up</p>
                         <p class="text-xs text-slate mt-1">Sometimes the only option</p>
                     </div>
@@ -349,12 +213,24 @@
                 </ul>
             </div>
 
-            <div class="key-point rounded-xl p-4">
+            <div class="key-point rounded-xl p-4 mb-4">
                 <h3 class="font-semibold text-ink mb-2">Warning Triangle Placement</h3>
                 <ul class="text-sm text-slate space-y-1">
                     <li>• Normal conditions: <strong>200 feet</strong> behind your vehicle</li>
                     <li>• On a hill or curve: <strong>500 feet</strong> behind your vehicle</li>
                 </ul>
+            </div>
+
+            <div class="warning-box rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Winter Emergency Preparedness</h3>
+                <p class="text-sm text-slate mb-2">Keep these items in your vehicle during winter months:</p>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Blankets</li>
+                    <li>• Extra gloves</li>
+                    <li>• Warm hats</li>
+                    <li>• Flashlight with fresh batteries</li>
+                </ul>
+                <p class="text-sm text-slate mt-2">These can be lifesaving if you must wait for emergency responders or a tow.</p>
             </div>
         </section>
 
@@ -447,7 +323,17 @@
                 <p class="text-sm text-slate">Slow down and turn on your <strong>hazard lights</strong> to show you acknowledge the officer and are looking for a safe place to stop.</p>
             </div>
 
-            <div class="danger-box rounded-xl p-4">
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Additional Guidelines</h3>
+                <ul class="text-sm text-slate space-y-2">
+                    <li><strong>Tinted windows:</strong> Roll down all windows after stopping and before the officer approaches</li>
+                    <li><strong>Well-lit area:</strong> At night, look for locations with street lights, near restaurants, or service stations</li>
+                    <li><strong>Interior light:</strong> Turn on your interior light at night to help the officer see inside</li>
+                    <li><strong>Never stop on center median:</strong> Always pull to the right shoulder, not the center median of a freeway</li>
+                </ul>
+            </div>
+
+            <div class="danger-box rounded-xl p-4 mb-4">
                 <h3 class="font-semibold text-ink mb-2">Do NOT</h3>
                 <ul class="text-sm text-slate space-y-1">
                     <li>• Exit your vehicle unless directed by the officer</li>
@@ -456,6 +342,11 @@
                     <li>• Refuse breath, blood, or performance tests (can result in license suspension)</li>
                     <li>• Resist arrest if taken into custody</li>
                 </ul>
+            </div>
+
+            <div class="key-point rounded-xl p-4">
+                <h3 class="font-semibold text-ink mb-2">Your Rights</h3>
+                <p class="text-sm text-slate">If you believe an officer acted inappropriately, report the conduct to the officer's superiors after the encounter. Officers must provide their names and badge numbers upon request. You can file written complaints with the agency's internal affairs division or civilian complaint board.</p>
             </div>
         </section>
 
@@ -498,9 +389,28 @@
                 </div>
             </div>
 
-            <div class="warning-box rounded-xl p-4">
-                <h3 class="font-semibold text-ink mb-2">Prescription & Over-the-Counter Drugs</h3>
-                <p class="text-sm text-slate">Many medications impair your ability to drive safely. Always check labels and consult a physician or pharmacist before driving.</p>
+            <div class="warning-box rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-ink mb-2">Prescription &amp; Over-the-Counter Drugs</h3>
+                <p class="text-sm text-slate mb-2">Many medications impair your ability to drive safely, including:</p>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Prescription medications</li>
+                    <li>• Over-the-counter drugs (cold medicine, allergy medicine, sleep aids)</li>
+                    <li>• Recreational drugs</li>
+                </ul>
+                <p class="text-sm text-slate mt-2"><strong>Always</strong> check labels and consult a physician or pharmacist before driving.</p>
+            </div>
+
+            <div class="card p-5 sm:p-6">
+                <h3 class="font-semibold text-ink mb-3">Effects of Alcohol on Driving</h3>
+                <p class="text-sm text-slate mb-3">Alcohol negatively affects your ability to drive by:</p>
+                <ul class="text-sm text-slate space-y-1">
+                    <li>• Impairing your brain's ability to think clearly</li>
+                    <li>• Reducing physical coordination</li>
+                    <li>• Decreasing reaction time</li>
+                </ul>
+                <div class="danger-box rounded-lg p-3 mt-3">
+                    <p class="text-sm text-ink">A car can be a <strong>lethal weapon</strong> when operated by an impaired driver.</p>
+                </div>
             </div>
         </section>
 
@@ -535,15 +445,21 @@
         <section class="mb-8">
             <h2 class="font-display text-xl sm:text-2xl font-bold text-ink mb-4">Preventing Vehicle Theft</h2>
 
-            <div class="card p-5 sm:p-6">
+            <div class="card p-5 sm:p-6 mb-4">
+                <h3 class="font-semibold text-ink mb-3">Prevention Checklist</h3>
                 <ul class="text-sm text-slate space-y-2">
                     <li>• <strong>Remove keys</strong> and always lock doors</li>
-                    <li>• Do not hide a second set of keys in or around the vehicle</li>
-                    <li>• Park with front wheels turned sharply and apply emergency brake</li>
-                    <li>• Never leave vehicle running unattended</li>
-                    <li>• Consider installing an anti-theft device</li>
-                    <li>• Park in well-lit, well-patrolled areas</li>
+                    <li>• <strong>Do not hide</strong> a second set of keys in or around the vehicle</li>
+                    <li>• Park with front wheels turned <strong>sharply to the right</strong></li>
+                    <li>• Apply the <strong>emergency brake</strong></li>
+                    <li>• <strong>Never</strong> leave vehicle running unattended</li>
+                    <li>• Consider installing an <strong>anti-theft device</strong></li>
+                    <li>• Park in <strong>well-lit, well-patrolled</strong> areas whenever possible</li>
                 </ul>
+            </div>
+
+            <div class="key-point rounded-xl p-4">
+                <p class="text-sm text-ink"><strong>Remember:</strong> Most vehicle thefts are crimes of opportunity. Taking simple precautions significantly reduces your risk.</p>
             </div>
         </section>
 
@@ -576,6 +492,14 @@
                     <h3 class="font-semibold text-ink mb-2 text-sm">CO Poisoning Signs</h3>
                     <p class="text-xs text-slate">Drowsiness, headache, blue skin, light sensitivity</p>
                 </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">Warning Triangles</h3>
+                    <p class="text-xs text-slate">200 feet behind (normal), 500 feet (hills/curves)</p>
+                </div>
+                <div class="card p-4">
+                    <h3 class="font-semibold text-ink mb-2 text-sm">BAC Factors</h3>
+                    <p class="text-xs text-slate">Amount consumed, speed of consumption, body weight</p>
+                </div>
             </div>
         </section>
 
@@ -593,29 +517,6 @@
         </footer>
     </main>
 
-    <script>
-        var sections = document.querySelectorAll('section[id]');
-        var navLinks = document.querySelectorAll('.nav-pill');
-
-        function highlightNav() {
-            var scrollPos = window.scrollY + 150;
-            sections.forEach(function(section) {
-                var top = section.offsetTop;
-                var bottom = top + section.offsetHeight;
-                var id = section.getAttribute('id');
-                if (scrollPos >= top && scrollPos < bottom) {
-                    navLinks.forEach(function(link) {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }
-
-        window.addEventListener('scroll', highlightNav);
-        highlightNav();
-    </script>
+    <script src="shared-nav.js"></script>
 </body>
 </html>
